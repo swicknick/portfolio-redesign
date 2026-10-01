@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="About · Nicholas Rode">
+  <section class="wrap about reveal">
+    <p class="eyebrow">About</p>
+    <h1>Motion, product, and the handoff in between.</h1>
+    <div class="body">
+      <p>
+        I started in motion and spent three years as a junior product designer under a senior
+        designer, working on product UI, onboarding, and motion. Today I design interactive motion
+        for AI, voice, and data infrastructure products.
+      </p>
+      <p>
+        What I care about most is the handoff: the moment a design leaves my hands and has to
+        survive production. That's why I've started building my own tools with AI. One turns
+        rendered animation into lightweight web shaders. The other turns Figma designs into React
+        code that developers can rely on.
+      </p>
+      <p>Outside work: 3D, audio engineering, and hiking with my family and dog.</p>
+
+      <h2 class="eyebrow">Experience</h2>
+      <ul class="xp">
+        <li><strong>Motion Designer / Illustrator</strong>, Webstacks <span>2025–now</span></li>
+        <li><strong>Junior Product Designer</strong>, Variable Medium <span>2021–2024</span></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about {
+    padding-top: 48px;
+  }
+  h1 {
+    font-size: clamp(34px, 5vw, 56px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    max-width: 14em;
+    margin: 16px 0 32px;
+  }
+  .body {
+    max-width: 640px;
+    color: var(--muted);
+  }
+  .body h2 {
+    margin-top: 48px;
+  }
+  .xp {
+    list-style: none;
+    padding: 0;
+    color: var(--text);
+  }
+  .xp li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .xp span {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+  }
+</style>

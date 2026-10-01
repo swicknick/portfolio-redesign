@@ -1,0 +1,95 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Nicholas Rode, Product & Motion Designer',
+  description = 'Vancouver-based designer working where motion, product, and code meet.',
+} = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="wrap nav">
+      <a href="/" class="logo">Nicholas Rode</a>
+      <nav>
+        <a href="/#work" aria-current={path.startsWith('/work') ? 'page' : undefined}>Work</a>
+        <a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
+        <a href="/contact" class="cta">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="wrap footer">
+      <span>Vancouver, PST · Available for freelance</span>
+      <a href="/contact">Get in touch →</a>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .logo {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--text);
+  }
+  nav .cta {
+    color: var(--text);
+    border: 1px solid var(--line);
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 120px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+</style>

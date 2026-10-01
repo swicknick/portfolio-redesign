@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+
+// TODO: free access key from https://web3forms.com (sent to the inbox you choose)
+const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY';
+// TODO: public contact email
+const EMAIL = 'hello@example.com';
+---
+
+<Base title="Contact · Nicholas Rode">
+  <section class="wrap contact reveal">
+    <p class="eyebrow">Contact</p>
+    <h1>Let's work together.</h1>
+    <p class="lede">
+      Interactive motion, prototypes, or product design for AI and data products. Tell me what
+      you're building.
+    </p>
+
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+      <input type="hidden" name="subject" value="New message from portfolio" />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+      <label>Name<input name="name" required autocomplete="name" /></label>
+      <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+      <label>Project<textarea name="message" rows="6" required></textarea></label>
+      <button type="submit">Send message</button>
+    </form>
+
+    <p class="alt">Or email <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+  </section>
+</Base>
+
+<style>
+  .contact {
+    padding-top: 48px;
+  }
+  .contact > * {
+    max-width: 640px;
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 60px);
+    letter-spacing: -0.02em;
+    margin: 16px 0 12px;
+  }
+  .lede {
+    color: var(--muted);
+    margin: 0 0 40px;
+  }
+  form {
+    display: grid;
+    gap: 20px;
+  }
+  label {
+    display: grid;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  input,
+  textarea {
+    font: inherit;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  input:focus,
+  textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .hp {
+    display: none;
+  }
+  button {
+    justify-self: start;
+    font: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: 0;
+    border-radius: 999px;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+  .alt {
+    margin-top: 32px;
+    color: var(--muted);
+  }
+</style>
