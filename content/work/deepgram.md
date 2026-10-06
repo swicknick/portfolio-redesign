@@ -4,8 +4,8 @@ summary: Interactive motion that lets people feel what AI voice can do, not just
 role: Interactive Motion Designer & Developer
 year: 2025
 tools: [Rive]
-category: motion
-order: 5
+category: ui-motion
+order: 2
 ---
 
 ## The problem

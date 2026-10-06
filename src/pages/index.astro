@@ -6,9 +6,10 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 const featured = work.find((w) => w.data.category === 'featured');
 
 const groups = [
+  { key: 'ui-motion', label: 'Product UI motion' },
   { key: 'product', label: 'Product' },
-  { key: 'motion', label: 'Interactive motion for AI & data' },
-  { key: 'systems', label: 'Systems' },
+  { key: 'motion', label: 'Explaining complex products' },
+  { key: 'concept', label: 'Concepts' },
 ] as const;
 ---
 

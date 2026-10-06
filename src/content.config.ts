@@ -10,7 +10,7 @@ const work = defineCollection({
     role: z.string(),
     year: z.number(),
     tools: z.array(z.string()),
-    category: z.enum(['featured', 'product', 'motion', 'systems']),
+    category: z.enum(['featured', 'ui-motion', 'product', 'motion', 'concept']),
     order: z.number(),
   }),
 });

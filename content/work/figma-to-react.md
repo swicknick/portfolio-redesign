@@ -5,7 +5,7 @@ role: Designer & builder
 year: 2026
 tools: [Figma Plugin API, React, Claude Code]
 category: product
-order: 2
+order: 4
 ---
 
 ## The problem
