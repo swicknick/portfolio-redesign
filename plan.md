@@ -41,7 +41,7 @@ Product / interactive motion and prototyping at a tech or AI company.
 5. Log the session.
 
 ## Order of work
-1. [ ] **Resume:** done; edit text in [career/resume-styles/build.py](career/resume-styles/build.py), which builds all 3 styles.
+1. [x] **Resume:** done; edit text in [career/resume-styles/build.py](career/resume-styles/build.py), which builds all 3 styles.
 2. [ ] **Start applying**, using the current Framer site, from week 1.
 3. [ ] **Lighthouse 40 → 99:** you confirm which project it came from, then we re-measure it with your own Rive file.
 4. [ ] **Site content:** dig through past work for more product UI and performance pieces.
