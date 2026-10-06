@@ -1,0 +1,52 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Nicholas Rode Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 8.5in; min-height: 11in; }
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding-left: 1.1em; }
+a { color: inherit; text-decoration: none; }
+
+body { font-family: 'Inter Tight', Arial, sans-serif; color: #141416; font-size: 9.2pt; line-height: 1.38; }
+.page { padding: 0.45in 0.6in; position: relative; }
+.page::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(#ff7a45, #7a1f5c); }
+header { margin-bottom: 6px; }
+h1 { font-size: 26pt; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+.title { font-size: 12pt; color: #e0551c; font-weight: 500; margin-top: 6px; }
+.contact { font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #5f5f66; margin-top: 8px; }
+.contact a { color: #e0551c; }
+section { margin-top: 9px; padding-top: 8px; border-top: 1px solid #e2e2dd; }
+h2 { font-family: 'JetBrains Mono', monospace; font-size: 7.8pt; font-weight: 500; text-transform: uppercase; color: #5f5f66; margin-bottom: 6px; }
+.summary { font-size: 9.6pt; }
+.skill, .tool { margin-bottom: 2px; }
+.job { margin-bottom: 6px; }
+.job-head { display: flex; justify-content: space-between; align-items: baseline; }
+h3 { font-size: 10.5pt; font-weight: 600; }
+.org { color: #e0551c; }
+.dates { font-family: 'JetBrains Mono', monospace; font-size: 7.8pt; color: #5f5f66; white-space: nowrap; }
+.note { color: #5f5f66; font-size: 9pt; }
+li { margin-top: 1px; }
+li::marker { color: #e0551c; }
+.split { display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; }
+
+.edu { display: flex; justify-content: space-between; gap: 8px; }
+.course { margin-bottom: 1px; }
+</style></head><body><div class="page">
+<header>
+  <h1>Nicholas Rode</h1>
+  <p class="title">Product &amp; Interactive Motion Designer</p>
+  <p class="contact">theniceguynick@gmail.com · 281.794.1242 · Vancouver, WA · <a href="https://nicholasrode.framer.website/">Portfolio</a> · <a href="https://vimeo.com/1189183155">Motion Reel</a></p>
+</header>
+<section><h2>Summary</h2><p class="summary">Product and interactive motion designer with 5+ years of experience shipping Rive and Lottie work for AI and data companies like Deepgram, Materialize, and Shep. I design motion that explains products, and I build AI tools that get it into production.</p></section>
+<section><h2>Skills</h2><p class="skill"><strong>Motion &amp; interaction:</strong> Rive (state machines, interactive components), After Effects, Lottie/Bodymovin, UI animation, 2D/3D animation, compositing</p><p class="skill"><strong>Design:</strong> Figma, Illustrator, UI/UX design, design systems, interactive prototyping</p><p class="skill"><strong>Production &amp; performance:</strong> Rive web runtimes (React, Canvas, WebGL2), Lottie JSON delivery, WebGL shaders, Lighthouse performance tuning, reduced-motion accessibility, developer handoff</p><p class="skill"><strong>AI &amp; building:</strong> Claude Code, AI-assisted tool building, Figma plugin development</p></section>
+<section><h2>Experience</h2><div class="job"><div class="job-head"><h3>Motion Designer, <span class="org">Webstacks</span></h3><span class="dates">Jan 2025 – Present</span></div><p class="note">B2B web design and development agency</p><ul><li>Built 4 interactive Rive product demos for Deepgram&#x27;s AI voice platform: voice-to-text, voice avatars, assistant states, and a Slack integration walkthrough</li><li>Designed a 10-piece Rive animation system for Shep&#x27;s rebrand, turning automation, security, and scale into one visual language</li><li>Created scroll-driven Lottie animations for Materialize that show live data moving through the product</li><li>Choose and optimize animation runtimes for mobile web performance</li><li>Ship production Rive state machines with reduced-motion support and cross-device playback</li></ul></div><div class="job"><div class="job-head"><h3>Junior Designer (Product UI &amp; Motion), <span class="org">Variable Medium</span></h3><span class="dates">Jan 2021 – Dec 2024</span></div><ul><li>Designed the desktop and mobile peer-to-peer trading app for Evaluate, from interactive prototypes for user testing through launch, plus its marketing site and onboarding video</li><li>Designed trade and chat flows, including asynchronous offers with expiry dates so traders don&#x27;t need to be online at the same time</li><li>Built advanced interactive prototypes for user testing and developer handoff</li><li>Contributed to design system development and created motion that clarified complex product flows</li></ul></div><div class="job"><div class="job-head"><h3>Freelance Motion Designer &amp; Illustrator, <span class="org">Self-employed</span></h3><span class="dates">Jul 2024 – Present</span></div><ul><li>Deliver motion graphics, illustration, and web and mobile design for tech, SaaS, and B2B clients</li></ul></div></section>
+<section><h2>Tools I've Built</h2><p class="tool"><strong>Sequence to Shader:</strong> An AI-built pipeline that converts After Effects renders into lightweight WebGL shaders with measured accuracy, delivered as a drop-in module for developers.</p><p class="tool"><strong>Figma → React:</strong> A Figma plugin that generates reliable React code from designs, reducing design-to-code drift.</p></section>
+<section class="split">
+  <div><h2>Education</h2><p class="edu"><strong>Art Institute of Seattle</strong><span class="dates"></span></p><p class="edu"><strong>Nucamp, Full Stack Web Design</strong><span class="dates">2020</span></p></div>
+  <div><h2>Courses</h2><p class="course">Rive Masterclass</p><p class="course">TheMotionMagic, Ultimate Rive Animation Course</p><p class="course">School of Motion, A Motion Design Masterpiece</p></div>
+</section>
+</div></body></html>
