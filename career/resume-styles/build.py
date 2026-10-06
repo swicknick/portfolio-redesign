@@ -201,28 +201,27 @@ li { margin-top: 1px; }
 .split ul { padding-left: 1em; }
 """
 
-# 2. Product / tech: single column, ATS-safe, mono metadata, orange accent matching the new site
+# 2. Product / tech: single column, ATS-safe, mono metadata, burnt-orange accent
 TECH = """
-body { font-family: 'Inter Tight', Arial, sans-serif; color: #141416; font-size: 9.2pt; line-height: 1.38; }
-.page { padding: 0.45in 0.6in; position: relative; }
-.page::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: linear-gradient(#ff7a45, #7a1f5c); }
+body { font-family: 'Inter', Arial, sans-serif; color: #0a0a0a; font-size: 9.4pt; line-height: 1.4; }
+.page { padding: 0.45in 0.6in; }
 header { margin-bottom: 6px; }
-h1 { font-size: 26pt; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
-.title { font-size: 12pt; color: #e0551c; font-weight: 500; margin-top: 6px; }
-.contact { font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #5f5f66; margin-top: 8px; }
-.contact a { color: #e0551c; }
-section { margin-top: 9px; padding-top: 8px; border-top: 1px solid #e2e2dd; }
-h2 { font-family: 'JetBrains Mono', monospace; font-size: 7.8pt; font-weight: 500; text-transform: uppercase; color: #5f5f66; margin-bottom: 6px; }
-.summary { font-size: 9.6pt; }
+h1 { font-size: 26pt; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
+.title { font-size: 12pt; color: #b5400f; font-weight: 600; margin-top: 6px; }
+.contact { font-family: 'JetBrains Mono', monospace; font-size: 8.2pt; color: #27272a; margin-top: 8px; }
+.contact a { color: #b5400f; font-weight: 500; }
+section { margin-top: 9px; padding-top: 8px; border-top: 1px solid #d4d4d8; }
+h2 { font-family: 'JetBrains Mono', monospace; font-size: 8pt; font-weight: 500; text-transform: uppercase; color: #3f3f46; margin-bottom: 6px; }
+.summary { font-size: 9.8pt; }
 .skill, .tool { margin-bottom: 2px; }
 .job { margin-bottom: 6px; }
 .job-head { display: flex; justify-content: space-between; align-items: baseline; }
 h3 { font-size: 10.5pt; font-weight: 600; }
-.org { color: #e0551c; }
-.dates { font-family: 'JetBrains Mono', monospace; font-size: 7.8pt; color: #5f5f66; white-space: nowrap; }
-.note { color: #5f5f66; font-size: 9pt; }
+.org { color: #b5400f; }
+.dates { font-family: 'JetBrains Mono', monospace; font-size: 8pt; color: #3f3f46; white-space: nowrap; }
+.note { color: #3f3f46; font-size: 9pt; }
 li { margin-top: 1px; }
-li::marker { color: #e0551c; }
+li::marker { color: #b5400f; }
 .split { display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; }
 """
 
@@ -262,7 +261,7 @@ ROWS_CSS = """
 
 STYLES = {
     "1-swiss-minimal": single_column(SWISS + ROWS_CSS, "family=Inter:wght@400;600;700"),
-    "2-product-tech": single_column(TECH + ROWS_CSS, "family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500"),
+    "2-product-tech": single_column(TECH + ROWS_CSS, "family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500"),
     "3-editorial-two-column": two_column(EDITORIAL + ROWS_CSS, "family=DM+Sans:wght@400;700&family=Instrument+Serif"),
 }
 
