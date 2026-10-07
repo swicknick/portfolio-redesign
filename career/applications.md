@@ -25,3 +25,12 @@ Status: **open** means verified open on the company's own board that day.
 
 | Date | Company | Role | Resume version | Note sent | Follow-up |
 |---|---|---|---|---|---|
+
+## Handoff for the browser session (2026-10-07)
+- **Resume:** `career/resume-styles/2-product-tech.pdf`. Rebuild with `python3 career/resume-styles/build.py` if the text changes.
+- **Rules:** fill in application forms in Nicholas's Chrome, but **he reviews and clicks Submit himself**. Never share his current rate. Pay targets are in `plan.md`. The search is confidential, so nothing should reach his employer (Webstacks).
+- **Next:**
+  1. Nicholas finds the shortlist above too generic. He wants fresher, less-reposted roles.
+  2. Search motion-specific boards (Rive community, Motionographer, School of Motion), design agencies' and studios' own career pages (including Portland: Instrument, W+K, Laika, Nike, Adidas, Columbia), and staffing agencies (Aquent, Creative Circle, Vitamin T, The Mom Project, 24 Seven).
+  3. Use the logged-in browser for sites that need JavaScript or sign-in, such as LinkedIn and Wellfound.
+  4. Nicholas picks 3. Tailor the summary line and write a short note for each, then fill in the forms.
