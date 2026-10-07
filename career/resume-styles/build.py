@@ -59,7 +59,7 @@ JOBS = [
         "role": "Freelance Motion Designer & Illustrator",
         "org": "Self-employed",
         "note": "",
-        "dates": "Jul 2024 – Present",
+        "dates": "2022 – Present",
         "bullets": [
             "Deliver motion graphics, illustration, and web and mobile design for tech, SaaS, and B2B clients",
         ],
