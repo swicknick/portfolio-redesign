@@ -67,6 +67,7 @@ JOBS = [
 ]
 
 TOOLS = [
+    ("Stroke Center (published on Figma Community)", "A Figma plugin that converts inside and outside strokes to center strokes, so designs export cleanly to Lottie."),
     ("Sequence to Shader", "An AI-built pipeline that converts After Effects renders into lightweight WebGL shaders with measured accuracy, delivered as a drop-in module for developers."),
     ("Figma → React", "A Figma plugin that generates reliable React code from designs, reducing design-to-code drift."),
 ]

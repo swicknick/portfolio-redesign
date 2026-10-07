@@ -46,6 +46,14 @@ Claude keeps this file up to date from your answers in chat. You don't need to e
 |---|---|---|---|---|---|
 | | | | | | |
 
+## Tools
+
+| Tool | What | Status |
+|---|---|---|
+| Stroke Center | Figma plugin: inside/outside strokes → center, Lottie-ready | Published on Figma Community, Mar 2026; 22 users (Oct 2026) |
+| Sequence to Shader | AE renders → WebGL shaders | Built for Webstacks |
+| Figma → React | Figma → reliable React code | Built for Webstacks |
+
 ## Loaders and product UI motion (any employer)
 
 | What | For | Tool | Proof |
