@@ -67,9 +67,10 @@ JOBS = [
 ]
 
 TOOLS = [
-    ("Stroke Center (published on Figma Community)", "A Figma plugin that converts inside and outside strokes to center strokes, so designs export cleanly to Lottie."),
-    ("Sequence to Shader", "An AI-built pipeline that converts After Effects renders into lightweight WebGL shaders with measured accuracy, delivered as a drop-in module for developers."),
-    ("Figma → React", "A Figma plugin that generates reliable React code from designs, reducing design-to-code drift."),
+    ("Stroke Center (Figma Community)", "Plugin that converts inside/outside strokes to center for clean Lottie export."),
+    ("Design to Webpage", "AI skill that turns Figma designs into working HTML prototypes with interactions and motion."),
+    ("Sequence to Shader", "AI-built pipeline that turns After Effects renders into lightweight WebGL shaders."),
+    ("Figma → React", "Figma plugin that generates reliable React code from designs."),
 ]
 
 EDUCATION = [("Art Institute of Seattle", ""), ("Nucamp, Full Stack Web Design", "2020")]
@@ -143,9 +144,9 @@ def single_column(css, fonts):
   <p class="contact">{" · ".join(e(c) for c in CONTACT)} · {links_html()}</p>
 </header>
 <section><h2>Summary</h2><p class="summary">{e(SUMMARY)}</p></section>
-<section><h2>Skills</h2>{skills_html()}</section>
 <section><h2>Experience</h2>{jobs_html()}</section>
 <section><h2>Tools I've Built</h2>{tools_html()}</section>
+<section><h2>Skills</h2>{skills_html()}</section>
 <section class="split">
   <div><h2>Education</h2>{edu_html()}</div>
   <div><h2>Courses</h2>{courses_html()}</div>
