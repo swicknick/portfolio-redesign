@@ -18,8 +18,8 @@ LINKS = [("Portfolio", "https://nicholasrode.framer.website/"), ("Motion Reel", 
 
 SUMMARY = (
     "Product and interactive motion designer for AI and SaaS companies, including Gong, Fireworks AI, "
-    "and Deepgram. I use whatever gets motion shipped (Rive, Lottie, After Effects, Figma, or code) "
-    "and build AI tools that close the gap between design and production."
+    "and Deepgram. I work across Rive, Lottie, After Effects, Figma, and code, and I build AI tools "
+    "that close the gap between design and production."
 )
 
 SKILLS = [
