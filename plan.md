@@ -43,9 +43,9 @@ Product / interactive motion and prototyping at a tech or AI company.
 ## Order of work
 1. [x] **Resume:** done; edit text in [career/resume-styles/build.py](career/resume-styles/build.py), which builds all 3 styles.
 2. [ ] **Start applying**, using the current Framer site, from week 1.
-3. [ ] **Lighthouse 40 → 99:** you confirm which project it came from, then we re-measure it with your own Rive file.
+3. [ ] **Lighthouse 40 → 99:** came from the **Shep hero**. Confirm which numbers are right (blog body says 70–85 → 90–100), then add to resume.
 4. [ ] **Site content:** dig through past work for more product UI and performance pieces.
-5. [ ] **Site design pass.** Ask Nicholas for his reference component sites.
+5. [ ] **Site design pass.** References: motion.dev, componentry.dev, osmo.supply (button pack), bookofshapes.com. Immersive + performant.
 6. [ ] **Practice technical interview**, before the first real interviews.
 
 ## Portfolio order

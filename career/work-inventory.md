@@ -29,7 +29,7 @@ Claude keeps this file up to date from your answers in chat. You don't need to e
 | Omnia | ? | | | | |
 | Deepgram | 4 interactive product demos | Rive | product page | | 4 components |
 | Materialize | hero + scroll animation + 3 system visuals | AE → Lottie | marketing | | |
-| Shep | 10-piece animation system | Rive | marketing | | 10 pieces |
+| Shep | 10-piece animation system; hero animation = source of the Lighthouse 40 → 99 result (WebGL2 → Canvas runtime) | Rive | marketing | | 10 pieces; Lighthouse 40 → 99 |
 | Fortra | prototype (live in a couple of months) | | | | |
 | | | | | | |
 

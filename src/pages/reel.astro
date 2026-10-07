@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Showreel · Nicholas Rode" description="Nicholas Rode's 2025 motion design showreel.">
+  <section class="wrap reel reveal">
+    <p class="eyebrow">Showreel · 2025</p>
+    <video
+      src="/reel/reel-1080.mp4"
+      poster="/reel/poster.jpg"
+      controls
+      playsinline
+      preload="metadata"
+      width="1920"
+      height="1080"
+    ></video>
+  </section>
+</Base>
+
+<style>
+  .reel {
+    padding-top: 32px;
+  }
+  video {
+    width: 100%;
+    height: auto;
+    margin-top: 16px;
+    border-radius: var(--radius);
+    background: #1b1b1b;
+  }
+</style>
