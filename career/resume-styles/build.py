@@ -12,22 +12,22 @@ from pathlib import Path
 OUT = Path(__file__).parent
 
 NAME = "Nicholas Rode"
-TITLE = "Product & Interactive Motion Designer"
+TITLE = "Motion Designer & Engineer"
 CONTACT = ["theniceguynick@gmail.com", "281.794.1242", "Vancouver, WA"]
 LINKS = [("Portfolio", "https://nicholasrode.framer.website/"), ("Motion Reel", "https://vimeo.com/1189183155")]
 
 SUMMARY = (
-    "AI-native motion engineer and interactive motion designer with 5+ years of experience shipping motion "
-    "for B2B SaaS and tech brands. I turn complex products into clear, engaging motion and work AI-first every "
-    "day, using Claude Code to prototype, build, and ship work that is production-ready, fast, and accessible. "
-    "I also build AI-powered tools that remove friction between design and development."
+    "Motion designer and engineer with 5+ years of experience shipping motion for B2B SaaS and tech brands. "
+    "I turn complex products into clear, engaging motion and build it production-ready, fast, and accessible "
+    "in Rive, Lottie, and code. An AI-first workflow lets me prototype, iterate, and ship faster, and I build "
+    "my own tools to close the gap between design and development."
 )
 
 SKILLS = [
-    ("AI workflow", "Claude Code (daily, AI-first), AI-assisted prototyping and production code, building AI skills and Figma plugins, design-to-code automation"),
-    ("Motion & interaction", "Rive (state machines, interactive components), After Effects, Lottie/Bodymovin, UI animation, 2D/3D animation, compositing"),
+    ("Motion & interaction", "Rive (state machines, interactive components), After Effects, Lottie/Bodymovin, UI animation, micro-interactions, transitions, motion systems, visual storytelling, 2D/3D animation"),
     ("Design", "Figma (including motion), Illustrator, UI/UX design, design systems, interactive prototyping"),
     ("Production & performance", "Rive web runtimes (React, Canvas, WebGL2), Lottie JSON delivery, WebGL shaders, Lighthouse performance tuning, reduced-motion accessibility, developer handoff"),
+    ("AI workflow", "Claude Code, AI-assisted prototyping and production code, Figma plugin and AI tool development"),
 ]
 
 JOBS = [
@@ -38,9 +38,9 @@ JOBS = [
         "dates": "Jan 2025 – Present",
         "bullets": [
             "Shipped interactive motion, animation, and illustration for Gong and Fireworks AI, including product UI motion for Fireworks AI",
-            "Work AI-first with Claude Code every day to prototype interactions, write production animation code, and automate design-to-dev handoff",
             "Built 4 interactive Rive product demos for Deepgram's AI voice platform: voice-to-text, voice avatars, assistant states, and a Slack integration walkthrough",
-            "Designed a 10-piece Rive animation system for Shep's rebrand, turning automation, security, and scale into one visual language",
+            "Designed a 10-piece Rive motion system for Shep's rebrand, turning automation, security, and scale into one visual language",
+            "Use Claude Code daily to prototype interactions and write production animation code, speeding up design-to-dev handoff",
             "Choose and optimize animation runtimes for mobile web performance",
         ],
     },
