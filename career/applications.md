@@ -27,6 +27,8 @@ Status: **open** means verified open on the company's own board that day.
 |---|---|---|---|---|---|
 | 2026-10-07 | Baseten | Motion Designer (Brand Team), remote, $190–240K — https://jobs.ashbyhq.com/baseten/2ae59494-97a5-4344-ae34-ffa3fab364be | 2-product-tech.pdf | No (form has no note field) | Submitted; check ~2026-10-21 |
 | 2026-10-07 | Fieldguide | Senior Motion Designer, remote US, $140–170K — https://jobs.ashbyhq.com/fieldguide/ecc56a99-87fb-48f4-bcbb-491c79b783f0 | 2-product-tech.pdf | Yes, `career/notes/fieldguide.pdf` | Submitted; check ~2026-10-21 |
+| 2026-10-07 | Solomon Page (agency; media tech client) | Motion Designer (contract), remote, $50–60/hr — https://opportunities.solomonpage.com/job/470729/Motion-Designer | 2-product-tech.pdf | No | Submitted by Nicholas; check ~2026-10-21 |
+| 2026-10-07 | Instrument (Portland) | General Application, Motion Designer (contract), remote US, $60–105/hr — https://jobs.lever.co/instrument/f81bfe66-3833-4028-af91-c4b1becebd2d | 2-product-tech.pdf (with Lighthouse 40→99) | No (form questions only; rate given as $70–85/hr target) | Submitted, approved by Nicholas; check ~2026-10-21 |
 
 ## Handoff for the browser session (2026-10-07)
 - **Resume:** `career/resume-styles/2-product-tech.pdf`. Rebuild with `python3 career/resume-styles/build.py` if the text changes.
@@ -45,17 +47,11 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 **Waiting on Nicholas**
 | Company | Role | Pay | Link | Status |
 |---|---|---|---|---|
-| Solomon Page (agency, client: media tech platform) | Motion Designer (contract) | $50–60/hr | https://opportunities.solomonpage.com/job/470729/Motion-Designer | Passes filters. Form filled, but the resume uploader rejects automated uploads; attach the PDF and submit by hand |
-| Instrument (Portland) | General Application, Motion Designer (contract) | $60–105/hr | https://jobs.lever.co/instrument/f81bfe66-3833-4028-af91-c4b1becebd2d | Evergreen talent pool open since 2018, so it fails the freshness rule. Strong channel; approve to apply |
-| Ihsan | Founding Product Designer, Mobile UX/UI & Motion | not listed | https://dribbble.com/jobs/310967-Product-Designer-Mobile-UX-UI-Motion | Posted today; pay unknown |
 | Ally | Sr. UX Motion & Interaction Designer (LinkedIn says Remote; Workday lists Charlotte, NC) | $85–150K | https://ally.wd1.myworkdayjobs.com/Ally/job/Charlotte-NC/Sr-UX-Motion---Interaction-Designer_R2600620 | Passes filters; Workday needs an account Nicholas must create |
-| Pura | Lead Motion Designer, UX (Lottie/Rive, "Office/Remote/Hybrid") | not listed | https://www.linkedin.com/jobs/view/4472633563/ | Pay unknown |
-| Princeton10 | Motion Graphics & Animation Specialist, remote US | not listed | https://www.linkedin.com/jobs/view/4471819122/ | Pay unknown; agency video work |
-| Rive community (Ezelingo, AiRA) | Rive character / interaction animator gigs | not listed | https://community.rive.app/c/jobs | Applying means a public reply or DM |
-| AMC Global Media (via Motionographer) | Motion Graphics Designer/Animator, remote freelance Oct–Dec | rate TBD | https://jobs.motionographer.com/ | Pay unknown, broadcast-leaning |
-| The Monument (via Motionographer) | Senior AE Motion Designer, remote freelance | not listed | https://jobs.motionographer.com/jobs/607857484-senior-ae-motion-designer-at-the-monument | Pay unknown; apply by email with samples |
 
 **Skipped this run**
+- Pura Lead Motion Designer: Nicholas said yes, but LinkedIn lists it on-site in Pleasant Grove, UT. Held; ask him again.
+- Ihsan, Princeton10, AMC Global Media, The Monument, Rive community gigs: Nicholas said skip.
 - Harvey Sr Motion Designer: the form says hybrid, 3 days in office, SF/NY.
 - Krea Motion Designer: in person, SF.
 - Brain Co. Brand Designer, Motion: great fit (Rive, motion systems, AI workflow) but SF or relocate.

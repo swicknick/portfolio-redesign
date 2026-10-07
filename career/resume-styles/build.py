@@ -39,7 +39,7 @@ JOBS = [
         "bullets": [
             "Shipped interactive motion, animation, and illustration for Gong and Fireworks AI, including product UI motion for Fireworks AI",
             "Built 4 interactive Rive product demos for Deepgram's AI voice platform: voice-to-text, voice avatars, assistant states, and a Slack integration walkthrough",
-            "Designed a 10-piece Rive motion system for Shep's rebrand, turning automation, security, and scale into one visual language",
+            "Designed a 10-piece Rive motion system for Shep's rebrand and raised the hero's Lighthouse score from 40 to 99 by switching its Rive runtime from WebGL2 to Canvas",
             "Built AI-powered internal tools with Claude Code: a pipeline that turns After Effects renders into lightweight WebGL shaders and a Figma plugin that generates reliable React code",
             "Use AI daily to prototype interactions and write production animation code, speeding up design-to-dev handoff",
             "Choose and optimize animation runtimes for mobile web performance",
