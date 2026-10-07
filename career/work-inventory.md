@@ -20,6 +20,13 @@ Claude keeps this file up to date from your answers in chat. You don't need to e
 | Cribl | ? | | | | |
 | LogicMonitor | ? | | | | |
 | Varonis | ? | | | | |
+| Cordial | ? | | | | |
+| Osano | ? | | | | |
+| SevenRooms | ? | | | | |
+| GSA | ? (confirm: U.S. General Services Administration?) | | | | |
+| Firstup | ? | | | | |
+| 9fin | ? | | | | |
+| Omnia | ? | | | | |
 | Deepgram | 4 interactive product demos | Rive | product page | | 4 components |
 | Materialize | hero + scroll animation + 3 system visuals | AE → Lottie | marketing | | |
 | Shep | 10-piece animation system | Rive | marketing | | 10 pieces |
