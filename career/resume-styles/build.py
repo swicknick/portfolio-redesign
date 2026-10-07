@@ -17,17 +17,17 @@ CONTACT = ["theniceguynick@gmail.com", "281.794.1242", "Vancouver, WA"]
 LINKS = [("Portfolio", "https://nicholasrode.framer.website/"), ("Motion Reel", "https://vimeo.com/1189183155")]
 
 SUMMARY = (
-    "Motion engineer and interactive motion designer with 5+ years of experience shipping motion for "
-    "B2B SaaS and tech brands. I turn complex products into clear, engaging motion, ship it "
-    "production-ready, fast, and accessible across Rive, Lottie, and the web, and build AI-powered tools "
-    "that remove friction between design and development."
+    "AI-native motion engineer and interactive motion designer with 5+ years of experience shipping motion "
+    "for B2B SaaS and tech brands. I turn complex products into clear, engaging motion and work AI-first every "
+    "day, using Claude Code to prototype, build, and ship work that is production-ready, fast, and accessible. "
+    "I also build AI-powered tools that remove friction between design and development."
 )
 
 SKILLS = [
+    ("AI workflow", "Claude Code (daily, AI-first), AI-assisted prototyping and production code, building AI skills and Figma plugins, design-to-code automation"),
     ("Motion & interaction", "Rive (state machines, interactive components), After Effects, Lottie/Bodymovin, UI animation, 2D/3D animation, compositing"),
     ("Design", "Figma (including motion), Illustrator, UI/UX design, design systems, interactive prototyping"),
     ("Production & performance", "Rive web runtimes (React, Canvas, WebGL2), Lottie JSON delivery, WebGL shaders, Lighthouse performance tuning, reduced-motion accessibility, developer handoff"),
-    ("AI & building", "Claude Code, AI-assisted tool building, Figma plugin development"),
 ]
 
 JOBS = [
@@ -38,10 +38,10 @@ JOBS = [
         "dates": "Jan 2025 – Present",
         "bullets": [
             "Shipped interactive motion, animation, and illustration for Gong and Fireworks AI, including product UI motion for Fireworks AI",
+            "Work AI-first with Claude Code every day to prototype interactions, write production animation code, and automate design-to-dev handoff",
             "Built 4 interactive Rive product demos for Deepgram's AI voice platform: voice-to-text, voice avatars, assistant states, and a Slack integration walkthrough",
             "Designed a 10-piece Rive animation system for Shep's rebrand, turning automation, security, and scale into one visual language",
             "Choose and optimize animation runtimes for mobile web performance",
-            "Ship production Rive state machines with reduced-motion support and cross-device playback",
         ],
     },
     {
@@ -52,7 +52,6 @@ JOBS = [
         "bullets": [
             "Designed the desktop and mobile peer-to-peer trading app for Evaluate, from interactive prototypes for user testing through launch, plus its marketing site and onboarding video",
             "Designed trade and chat flows, including asynchronous offers with expiry dates so traders don't need to be online at the same time",
-            "Built advanced interactive prototypes for user testing and developer handoff",
             "Contributed to design system development and created motion that clarified complex product flows",
         ],
     },
@@ -206,8 +205,8 @@ li { margin-top: 1px; }
 
 # 2. Product / tech: single column, ATS-safe, mono metadata, navy accent
 TECH = """
-body { font-family: 'Inter', Arial, sans-serif; color: #0a0a0a; font-size: 9.4pt; line-height: 1.4; }
-.page { padding: 0.45in 0.6in; }
+body { font-family: 'Inter', Arial, sans-serif; color: #0a0a0a; font-size: 9.4pt; line-height: 1.38; }
+.page { padding: 0.4in 0.6in 0.35in; }
 header { margin-bottom: 6px; }
 h1 { font-size: 26pt; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
 .title { font-size: 12pt; color: #1e3a8a; font-weight: 600; margin-top: 6px; }
