@@ -17,9 +17,10 @@ CONTACT = ["theniceguynick@gmail.com", "281.794.1242", "Vancouver, WA"]
 LINKS = [("Portfolio", "https://nicholasrode.framer.website/"), ("Motion Reel", "https://vimeo.com/1189183155")]
 
 SUMMARY = (
-    "Interactive motion designer with a builder's mindset. I design motion that makes complex products "
-    "easy to understand, ship it production-ready, fast, and accessible, and build AI-powered tools that "
-    "remove friction between design and development."
+    "Motion engineer and interactive motion designer with 5+ years of experience, including two years "
+    "shipping motion for B2B SaaS brands. I turn complex products into clear, engaging motion, ship it "
+    "production-ready, fast, and accessible across Rive, Lottie, and the web, and build AI-powered tools "
+    "that remove friction between design and development."
 )
 
 SKILLS = [
