@@ -33,7 +33,7 @@ JOBS = [
     {
         "role": "Motion Engineer",
         "org": "Webstacks",
-        "note": "B2B web design and development agency · Promoted from Motion Designer in 2026",
+        "note": "B2B web design and development agency · Promoted from Motion Designer, Oct 2026",
         "dates": "Jan 2025 – Present",
         "bullets": [
             "Shipped interactive motion, animation, and illustration for Gong and Fireworks AI, including product UI motion for Fireworks AI",
