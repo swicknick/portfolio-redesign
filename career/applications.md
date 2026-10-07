@@ -25,6 +25,8 @@ Status: **open** means verified open on the company's own board that day.
 
 | Date | Company | Role | Resume version | Note sent | Follow-up |
 |---|---|---|---|---|---|
+| 2026-10-07 | Baseten | Motion Designer (Brand Team), remote, $190–240K — https://jobs.ashbyhq.com/baseten/2ae59494-97a5-4344-ae34-ffa3fab364be | 2-product-tech.pdf | No (form has no note field) | Submitted; check ~2026-10-21 |
+| 2026-10-07 | Fieldguide | Senior Motion Designer, remote US, $140–170K — https://jobs.ashbyhq.com/fieldguide/ecc56a99-87fb-48f4-bcbb-491c79b783f0 | 2-product-tech.pdf | Yes, `career/notes/fieldguide.pdf` | Submitted; check ~2026-10-21 |
 
 ## Handoff for the browser session (2026-10-07)
 - **Resume:** `career/resume-styles/2-product-tech.pdf`. Rebuild with `python3 career/resume-styles/build.py` if the text changes.
@@ -38,7 +40,7 @@ Status: **open** means verified open on the company's own board that day.
 ## Blitz run 2026-10-07 (browser session)
 Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`), Built In, Dribbble, Rive community, Remotive, We Work Remotely, Working Nomads, Himalayas, YC public jobs, studio boards (Instrument, Huge, DEPT, R/GA, Nike, others). Also checked Motionographer jobs and the five agency sites after reconnecting.
 
-**Submitted:** none. No role passed every filter end to end.
+**Submitted:** Baseten, Fieldguide (see Sent). Freshness relaxed to 3 months mid-run.
 
 **Waiting on Nicholas**
 | Company | Role | Pay | Link | Status |
@@ -55,7 +57,9 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 - Krea Motion Designer: in person, SF.
 - Brain Co. Brand Designer, Motion: great fit (Rive, motion systems, AI workflow) but SF or relocate.
 - MetaMask Staff UX Motion: first posted May 2026, reposted.
-- Baseten, Perplexity: posted more than 30 days ago.
+- Perplexity Motion Designer: in office 4 days/week, and its essay questions must be the applicant's own unassisted writing.
+- Rilla Rive contract: posted May 2026, older than 3 months.
+- Checkr, Via, tastytrade, Illumio, PagerDuty, Plaud, NBCU: in office or hybrid outside the area.
 - Pinterest Staff Motion: remote in California only; posted Aug.
 - Aquent Sr Designer (Visual & Motion): posted May 2026, reposted.
 - Suno, Silverback, PlayQ: paid-social / ad production.

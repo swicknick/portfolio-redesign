@@ -31,7 +31,7 @@ Nicholas wants a **full blitz**: every channel, as fast as possible. Read `plan.
 6. **Skip:**
    - heavy-3D roles (Houdini, 10+ years)
    - pure video editing or social-ad mills
-   - roles posted more than about 30 days ago or reposted again and again
+   - roles posted more than about 3 months ago (relaxed from 30 days on 2026-10-07), or reposted again and again
 7. **Log everything** in `career/applications.md`: date, company, role, link, pay, status. Commit after each batch.
 
 ## 1. LinkedIn
