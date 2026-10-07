@@ -34,3 +34,31 @@ Status: **open** means verified open on the company's own board that day.
   2. Search motion-specific boards (Rive community, Motionographer, School of Motion), design agencies' and studios' own career pages (including Portland: Instrument, W+K, Laika, Nike, Adidas, Columbia), and staffing agencies (Aquent, Creative Circle, Vitamin T, The Mom Project, 24 Seven).
   3. Use the logged-in browser for sites that need JavaScript or sign-in, such as LinkedIn and Wellfound.
   4. Nicholas picks 3. Tailor the summary line and write a short note for each, then fill in the forms.
+
+## Blitz run 2026-10-07 (browser session)
+Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`), Built In, Dribbble, Rive community, Remotive, We Work Remotely, Working Nomads, Himalayas, YC public jobs, studio boards (Instrument, Huge, DEPT, R/GA, Nike, others). Stopped when the Chrome extension disconnected.
+
+**Submitted:** none. No role passed every filter end to end.
+
+**Waiting on Nicholas**
+| Company | Role | Pay | Link | Status |
+|---|---|---|---|---|
+| Solomon Page (agency, client: media tech platform) | Motion Designer (contract) | $50–60/hr | https://opportunities.solomonpage.com/job/470729/Motion-Designer | Passes filters. Form filled, but the resume uploader rejects automated uploads; attach the PDF and submit by hand |
+| Instrument (Portland) | General Application, Motion Designer (contract) | $60–105/hr | https://jobs.lever.co/instrument/f81bfe66-3833-4028-af91-c4b1becebd2d | Evergreen talent pool open since 2018, so it fails the freshness rule. Strong channel; approve to apply |
+| Ihsan | Founding Product Designer, Mobile UX/UI & Motion | not listed | https://dribbble.com/jobs/310967-Product-Designer-Mobile-UX-UI-Motion | Posted today; pay unknown |
+| Rive community (Ezelingo, AiRA) | Rive character / interaction animator gigs | not listed | https://community.rive.app/c/jobs | Applying means a public reply or DM |
+
+**Skipped this run**
+- Harvey Sr Motion Designer: the form says hybrid, 3 days in office, SF/NY.
+- Krea Motion Designer: in person, SF.
+- Brain Co. Brand Designer, Motion: great fit (Rive, motion systems, AI workflow) but SF or relocate.
+- MetaMask Staff UX Motion: first posted May 2026, reposted.
+- Baseten, Perplexity: posted more than 30 days ago.
+- Pinterest Staff Motion: remote in California only; posted Aug.
+- Aquent Sr Designer (Visual & Motion): posted May 2026, reposted.
+- Suno, Silverback, PlayQ: paid-social / ad production.
+- Provectus Creative Technologist: a marketer who codes in Python/TS.
+- Nymbus, Wiraa, Cengage, Wpromote: pay under the floor.
+- Miaplaza: EMEA only. DEPT motion roles: outside the US.
+- Portland metro on-site/hybrid: only Mercury 3D (already skipped).
+- Remote boards, YC, School of Motion (board gone): no motion roles.
