@@ -69,7 +69,7 @@ JOBS = [
 
 TOOLS = [
     ("Stroke Center (Figma Community)", "Plugin that converts inside/outside strokes to center for clean Lottie export."),
-    ("Design to Webpage", "AI skill that turns Figma designs into working HTML prototypes with interactions and motion."),
+    ("Design to Webpage", "AI skill that turns Figma designs into working HTML prototypes with interactions and motion; used on client projects."),
 ]
 
 EDUCATION = [("Art Institute of Seattle", ""), ("Nucamp, Full Stack Web Design", "2020")]
