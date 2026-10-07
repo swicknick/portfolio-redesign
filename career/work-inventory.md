@@ -2,7 +2,7 @@
 
 Everything you've shipped, in one place. We'll use it for the resume (pick the biggest 3–4 names), for portfolio case studies, and for interview stories.
 
-Short answers are fine. Leave blanks if you don't know.
+Claude keeps this file up to date from your answers in chat. You don't need to edit it.
 
 **Columns:**
 - **Made:** what you made, e.g. Rive hero, loader set, product demo, scroll animation, prototype.
@@ -15,8 +15,11 @@ Short answers are fine. Leave blanks if you don't know.
 
 | Client | Made | Tool | Product UI? | Proof | Numbers |
 |---|---|---|---|---|---|
-| Gong | | | | | |
-| Fireworks AI | | | | | |
+| Gong | Rive interactive, AE/Lottie animation, illustration | Rive, AE, Lottie | | | |
+| Fireworks AI | Rive interactive, AE/Lottie animation, product UI motion, illustration | Rive, AE, Lottie | some | | |
+| Cribl | ? | | | | |
+| LogicMonitor | ? | | | | |
+| Varonis | ? | | | | |
 | Deepgram | 4 interactive product demos | Rive | product page | | 4 components |
 | Materialize | hero + scroll animation + 3 system visuals | AE → Lottie | marketing | | |
 | Shep | 10-piece animation system | Rive | marketing | | 10 pieces |
