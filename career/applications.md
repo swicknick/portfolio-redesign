@@ -48,6 +48,9 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 | Solomon Page (agency, client: media tech platform) | Motion Designer (contract) | $50–60/hr | https://opportunities.solomonpage.com/job/470729/Motion-Designer | Passes filters. Form filled, but the resume uploader rejects automated uploads; attach the PDF and submit by hand |
 | Instrument (Portland) | General Application, Motion Designer (contract) | $60–105/hr | https://jobs.lever.co/instrument/f81bfe66-3833-4028-af91-c4b1becebd2d | Evergreen talent pool open since 2018, so it fails the freshness rule. Strong channel; approve to apply |
 | Ihsan | Founding Product Designer, Mobile UX/UI & Motion | not listed | https://dribbble.com/jobs/310967-Product-Designer-Mobile-UX-UI-Motion | Posted today; pay unknown |
+| Ally | Sr. UX Motion & Interaction Designer (LinkedIn says Remote; Workday lists Charlotte, NC) | $85–150K | https://ally.wd1.myworkdayjobs.com/Ally/job/Charlotte-NC/Sr-UX-Motion---Interaction-Designer_R2600620 | Passes filters; Workday needs an account Nicholas must create |
+| Pura | Lead Motion Designer, UX (Lottie/Rive, "Office/Remote/Hybrid") | not listed | https://www.linkedin.com/jobs/view/4472633563/ | Pay unknown |
+| Princeton10 | Motion Graphics & Animation Specialist, remote US | not listed | https://www.linkedin.com/jobs/view/4471819122/ | Pay unknown; agency video work |
 | Rive community (Ezelingo, AiRA) | Rive character / interaction animator gigs | not listed | https://community.rive.app/c/jobs | Applying means a public reply or DM |
 | AMC Global Media (via Motionographer) | Motion Graphics Designer/Animator, remote freelance Oct–Dec | rate TBD | https://jobs.motionographer.com/ | Pay unknown, broadcast-leaning |
 | The Monument (via Motionographer) | Senior AE Motion Designer, remote freelance | not listed | https://jobs.motionographer.com/jobs/607857484-senior-ae-motion-designer-at-the-monument | Pay unknown; apply by email with samples |
@@ -71,4 +74,11 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 - BIEN freelance ($600–900/day, via Motionographer): the project ran Sep 24–Oct 5, already over.
 - Motionographer, other listings: 3D/C4D, video editing, on-site, or storyboard-only.
 
-**Agency profiles:** none created. Signed out of all five (Aquent, Creative Circle, The Mom Project, 24 Seven, Onward Search); each needs Nicholas to sign up or log in first.
+**Agency profiles (refreshed 2026-10-07)**
+| Agency | What changed |
+|---|---|
+| Aquent | New resume (parsed into experience), new headline/summary, address Seattle → Vancouver WA 98683, rate $70 desired / $60 min, salary $120K / $100K min, remote + hybrid (on-site off), "check with me first" before submittals |
+| Creative Circle | New resume set as preferred, Webstacks added, Variable Medium fixed (2021–2024), Rive + Lottie skills, reel link, location Seattle → Vancouver WA 98683, comp $70/$60 hr and $120K/$100K, hybrid + remote, freelance/FT |
+| The Mom Project | 29% → 100%: resume, headline, 5–8 yrs, industries, talents, skills, Webstacks + Variable Medium, prefs (fully remote, all contract types, $60/hr or $100K floor) |
+| Onward Search | Resume, phone, W-2 yes, 2 weeks' notice, remote + hybrid, perm/contract/C2H, $120K target / $100K min, $70 target / $60 min |
+| 24 Seven | Not done: site hung on login |
