@@ -15,11 +15,7 @@ The job search is confidential. Site copy says **"available for freelance"** (as
 Vancouver-based designer working where motion, product, and code meet. I've designed interactive experiences for AI and data companies, and I build AI-powered tools that close the gap between design and production: shader output from After Effects, and React from Figma.
 
 ## About (long)
-I started in motion and spent four years as a junior designer under a senior designer, working on product UI, prototypes, onboarding, and motion across [TODO: client types, e.g. fintech, web3, SaaS]. Today I design interactive motion for AI, voice, and data infrastructure products.
-
-What I care about most is the handoff: the moment a design leaves my hands and has to survive production. That's why I've started building tools with AI. One turns rendered animation into lightweight web shaders. The other turns Figma designs into React code that developers can rely on.
-
-Outside work: 3D, audio engineering, and hiking with my family and dog.
+Lives in src/pages/about.astro (rewritten 2026-10-07 around strengths, not industries).
 
 ## Experience
 - **Motion Designer**, Webstacks (Jan 2025–present)
