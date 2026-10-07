@@ -17,9 +17,9 @@ CONTACT = ["theniceguynick@gmail.com", "281.794.1242", "Vancouver, WA"]
 LINKS = [("Portfolio", "https://nicholasrode.framer.website/"), ("Motion Reel", "https://vimeo.com/1189183155")]
 
 SUMMARY = (
-    "Product and interactive motion designer for AI and SaaS companies, including Gong, Fireworks AI, "
-    "and Deepgram. I work across Rive, Lottie, After Effects, Figma, and code, and I build AI tools "
-    "that close the gap between design and production."
+    "Interactive motion designer with a builder's mindset. I design motion that makes complex products "
+    "easy to understand, ship it production-ready, fast, and accessible, and build AI-powered tools that "
+    "remove friction between design and development."
 )
 
 SKILLS = [
