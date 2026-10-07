@@ -36,7 +36,7 @@ Status: **open** means verified open on the company's own board that day.
   4. Nicholas picks 3. Tailor the summary line and write a short note for each, then fill in the forms.
 
 ## Blitz run 2026-10-07 (browser session)
-Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`), Built In, Dribbble, Rive community, Remotive, We Work Remotely, Working Nomads, Himalayas, YC public jobs, studio boards (Instrument, Huge, DEPT, R/GA, Nike, others). Stopped when the Chrome extension disconnected.
+Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`), Built In, Dribbble, Rive community, Remotive, We Work Remotely, Working Nomads, Himalayas, YC public jobs, studio boards (Instrument, Huge, DEPT, R/GA, Nike, others). Also checked Motionographer jobs and the five agency sites after reconnecting.
 
 **Submitted:** none. No role passed every filter end to end.
 
@@ -47,6 +47,8 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 | Instrument (Portland) | General Application, Motion Designer (contract) | $60–105/hr | https://jobs.lever.co/instrument/f81bfe66-3833-4028-af91-c4b1becebd2d | Evergreen talent pool open since 2018, so it fails the freshness rule. Strong channel; approve to apply |
 | Ihsan | Founding Product Designer, Mobile UX/UI & Motion | not listed | https://dribbble.com/jobs/310967-Product-Designer-Mobile-UX-UI-Motion | Posted today; pay unknown |
 | Rive community (Ezelingo, AiRA) | Rive character / interaction animator gigs | not listed | https://community.rive.app/c/jobs | Applying means a public reply or DM |
+| AMC Global Media (via Motionographer) | Motion Graphics Designer/Animator, remote freelance Oct–Dec | rate TBD | https://jobs.motionographer.com/ | Pay unknown, broadcast-leaning |
+| The Monument (via Motionographer) | Senior AE Motion Designer, remote freelance | not listed | https://jobs.motionographer.com/jobs/607857484-senior-ae-motion-designer-at-the-monument | Pay unknown; apply by email with samples |
 
 **Skipped this run**
 - Harvey Sr Motion Designer: the form says hybrid, 3 days in office, SF/NY.
@@ -62,3 +64,7 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 - Miaplaza: EMEA only. DEPT motion roles: outside the US.
 - Portland metro on-site/hybrid: only Mercury 3D (already skipped).
 - Remote boards, YC, School of Motion (board gone): no motion roles.
+- BIEN freelance ($600–900/day, via Motionographer): the project ran Sep 24–Oct 5, already over.
+- Motionographer, other listings: 3D/C4D, video editing, on-site, or storyboard-only.
+
+**Agency profiles:** none created. Signed out of all five (Aquent, Creative Circle, The Mom Project, 24 Seven, Onward Search); each needs Nicholas to sign up or log in first.
