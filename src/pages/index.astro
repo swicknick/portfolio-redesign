@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import ShaderHero from '../components/ShaderHero.astro';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const featured = work.find((w) => w.data.category === 'featured');
@@ -14,15 +15,16 @@ const groups = [
 ---
 
 <Base>
-  <section class="wrap hero reveal">
-    <p class="eyebrow">Product Designer · Motion, Prototyping & AI Tools</p>
-    <h1>I make complex products easy to understand, and I build the tools that get motion shipped.</h1>
-    <p class="lede">
-      Vancouver-based designer working where motion, product, and code meet. I design interactive
-      experiences for AI and data companies, and build AI-powered tools that close the gap between
-      design and production.
-    </p>
-  </section>
+  <ShaderHero>
+    <div class="hero reveal">
+      <p class="eyebrow">Product & Interactive Motion Designer</p>
+      <h1>I make complex products easy to understand, and I build the tools that get motion shipped.</h1>
+      <p class="lede">
+        Interactive motion designer with a builder's mindset, based in Vancouver, WA. Everything on
+        this page is built to run smooth, on purpose.
+      </p>
+    </div>
+  </ShaderHero>
 
   {
     featured && (
@@ -72,9 +74,8 @@ const groups = [
 </Base>
 
 <style>
-  .hero {
-    padding-top: 72px;
-    padding-bottom: 64px;
+  .hero .eyebrow {
+    color: rgba(237, 237, 240, 0.7);
   }
   h1 {
     font-size: clamp(34px, 5.5vw, 60px);

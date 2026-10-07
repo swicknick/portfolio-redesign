@@ -7,22 +7,11 @@
   --accent: #ff7a45;
   --radius: 14px;
   --max: 1080px;
-  --font: 'Inter Tight', system-ui, sans-serif;
+  --font: 'Inter Tight Variable', 'Inter Tight', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
   color-scheme: dark;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #f7f7f5;
-    --surface: #ffffff;
-    --line: #e2e2dd;
-    --text: #141416;
-    --muted: #5f5f66;
-    --accent: #e0551c;
-    color-scheme: light;
-  }
-}
 
 * { box-sizing: border-box; }
 
