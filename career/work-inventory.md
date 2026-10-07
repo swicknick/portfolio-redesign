@@ -23,7 +23,7 @@ Claude keeps this file up to date from your answers in chat. You don't need to e
 | Cordial | ? | | | | |
 | Osano | ? | | | | |
 | SevenRooms | ? | | | | |
-| GSA | ? (confirm: U.S. General Services Administration?) | | | | |
+| GSA (Geological Society of America) | ? | | | | |
 | Firstup | ? | | | | |
 | 9fin | ? | | | | |
 | Omnia | ? | | | | |

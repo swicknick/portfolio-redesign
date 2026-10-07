@@ -17,14 +17,14 @@ CONTACT = ["theniceguynick@gmail.com", "281.794.1242", "Vancouver, WA"]
 LINKS = [("Portfolio", "https://nicholasrode.framer.website/"), ("Motion Reel", "https://vimeo.com/1189183155")]
 
 SUMMARY = (
-    "Product and interactive motion designer with 5+ years of experience shipping Rive and Lottie work "
-    "for AI and data companies like Deepgram, Materialize, and Shep. I design motion that explains "
-    "products, and I build AI tools that get it into production."
+    "Product and interactive motion designer for AI and SaaS companies, including Gong, Fireworks AI, "
+    "and Deepgram. I use whatever gets motion shipped (Rive, Lottie, After Effects, Figma, or code) "
+    "and build AI tools that close the gap between design and production."
 )
 
 SKILLS = [
     ("Motion & interaction", "Rive (state machines, interactive components), After Effects, Lottie/Bodymovin, UI animation, 2D/3D animation, compositing"),
-    ("Design", "Figma, Illustrator, UI/UX design, design systems, interactive prototyping"),
+    ("Design", "Figma (including motion), Illustrator, UI/UX design, design systems, interactive prototyping"),
     ("Production & performance", "Rive web runtimes (React, Canvas, WebGL2), Lottie JSON delivery, WebGL shaders, Lighthouse performance tuning, reduced-motion accessibility, developer handoff"),
     ("AI & building", "Claude Code, AI-assisted tool building, Figma plugin development"),
 ]
@@ -36,9 +36,9 @@ JOBS = [
         "note": "B2B web design and development agency",
         "dates": "Jan 2025 – Present",
         "bullets": [
+            "Shipped interactive motion, animation, and illustration for Gong and Fireworks AI, including product UI motion for Fireworks AI",
             "Built 4 interactive Rive product demos for Deepgram's AI voice platform: voice-to-text, voice avatars, assistant states, and a Slack integration walkthrough",
             "Designed a 10-piece Rive animation system for Shep's rebrand, turning automation, security, and scale into one visual language",
-            "Created scroll-driven Lottie animations for Materialize that show live data moving through the product",
             "Choose and optimize animation runtimes for mobile web performance",
             "Ship production Rive state machines with reduced-motion support and cross-device playback",
         ],
