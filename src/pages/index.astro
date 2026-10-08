@@ -2,23 +2,11 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ShaderHero from '../components/ShaderHero.astro';
-import RiveEmbed from '../components/RiveEmbed.astro';
 
 const work = (await getCollection('work', (w) => !w.data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
 );
 
-// Deepgram leads the page as live, playable Rive files; it's left out of the grid below.
-const live = work.find((w) => w.id === 'deepgram');
-const liveDemos = live ? live.data.rive.slice(0, 3) : [];
-const grid = work.filter((w) => w.id !== 'deepgram');
-
-const groups = [
-  { key: 'ui-motion', label: 'Product UI motion' },
-  { key: 'product', label: 'Product' },
-  { key: 'motion', label: 'Explaining complex products' },
-  { key: 'concept', label: 'Concepts' },
-] as const;
 ---
 
 <Base>
@@ -32,27 +20,6 @@ const groups = [
       </p>
     </div>
   </ShaderHero>
-
-  {
-    live && (
-      <section class="wrap live" id="live">
-        <div class="live-head">
-          <div>
-            <p class="eyebrow">Live · {live.data.title} · {live.data.year}</p>
-            <h2>Go ahead, click around.</h2>
-            <p class="live-lede">
-              These are the production Rive files I built for Deepgram, running right here. Hover the
-              voices, tap one to hear it, press play on the transcript.
-            </p>
-          </div>
-          <a href={`/work/${live.id}`} class="more">See all four and how they work →</a>
-        </div>
-        <div class="live-grid">
-          {liveDemos.map((r) => <RiveEmbed {...r} />)}
-        </div>
-      </section>
-    )
-  }
 
   <section class="wrap">
     <div class="featured reveal" id="reel">
@@ -72,38 +39,53 @@ const groups = [
   </section>
 
   <section class="wrap" id="work">
-    {
-      groups.map((g) => {
-        const items = grid.filter((w) => w.data.category === g.key);
-        return (
-          items.length > 0 && (
-            <div class="group">
-              <h3 class="eyebrow">{g.label}</h3>
-              <div class="grid">
-                {items.map((w) => (
-                  <a href={`/work/${w.id}`} class="card">
-                    <div class="thumb">
-                      {w.data.cover && <img src={w.data.cover} alt="" loading="lazy" decoding="async" />}
-                    </div>
-                    <h4>{w.data.title}</h4>
-                    <p>{w.data.summary}</p>
-                    <span class="meta">
-                      {w.data.role} · {w.data.year}
-                    </span>
-                  </a>
-                ))}
-              </div>
+    <h2 class="eyebrow work-label">Work</h2>
+    <div class="grid">
+      {
+        work.map((w) => (
+          <a href={`/work/${w.id}`} class="card">
+            <div class="thumb">
+              {w.data.coverVideo ? (
+                <video
+                  data-thumb
+                  src={w.data.coverVideo}
+                  poster={w.data.cover}
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  aria-hidden="true"
+                />
+              ) : (
+                w.data.cover && <img src={w.data.cover} alt="" loading="lazy" decoding="async" />
+              )}
             </div>
-          )
-        );
-      })
-    }
+            <h3>{w.data.title}</h3>
+            <p>{w.data.summary}</p>
+            <span class="meta">
+              {w.data.role} · {w.data.year}
+            </span>
+          </a>
+        ))
+      }
+    </div>
   </section>
 </Base>
 
 <script>
   // Play the reel in place on the first click, with sound (the click allows unmuted playback).
   const btn = document.querySelector<HTMLButtonElement>('.reel-play');
+  // Card thumbnail loops play only while on screen, and not at all with reduced motion.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const v = e.target as HTMLVideoElement;
+        e.isIntersecting ? v.play().catch(() => {}) : v.pause();
+      }
+    });
+    document.querySelectorAll<HTMLVideoElement>('video[data-thumb]').forEach((v) => io.observe(v));
+  }
+
   btn?.addEventListener('click', () => {
     const v = document.createElement('video');
     Object.assign(v, { src: '/reel/reel-1080.mp4', poster: '/reel/poster.jpg', controls: true, playsInline: true });
@@ -131,37 +113,6 @@ const groups = [
     max-width: 38em;
     font-size: 19px;
     margin: 0;
-  }
-  .live {
-    margin-top: 24px;
-    margin-bottom: 96px;
-  }
-  .live-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 24px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-  }
-  .live h2 {
-    font-size: clamp(28px, 4vw, 40px);
-    letter-spacing: -0.02em;
-    margin: 8px 0 8px;
-  }
-  .live-lede {
-    color: var(--muted);
-    max-width: 36em;
-    margin: 0;
-  }
-  .live .more {
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .live-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-    gap: 20px;
   }
   .featured {
     display: grid;
@@ -243,8 +194,9 @@ const groups = [
   .more:hover {
     text-decoration: underline;
   }
-  .group {
-    margin-top: 80px;
+  .work-label {
+    margin: 96px 0 0;
+    font-weight: 400;
   }
   .grid {
     display: grid;
@@ -267,7 +219,8 @@ const groups = [
   .thumb:empty {
     background: radial-gradient(120% 90% at 20% 20%, #ff7a45 0%, #7a1f5c 45%, #120a1f 100%);
   }
-  .thumb img {
+  .thumb img,
+  .thumb video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -275,7 +228,7 @@ const groups = [
   .card:hover .thumb {
     transform: translateY(-4px);
   }
-  .card h4 {
+  .card h3 {
     font-size: 20px;
     margin: 16px 0 6px;
   }

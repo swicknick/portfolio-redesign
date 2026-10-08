@@ -5,7 +5,7 @@ role: UX/UI & Motion Designer
 year: 2023
 tools: [Figma, After Effects]
 category: product
-order: 3
+order: 4
 cover: /work/evaluate/live-trading.webp
 ---
 

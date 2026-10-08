@@ -5,8 +5,9 @@ role: Interactive Motion Designer & Developer
 year: 2025
 tools: [Rive]
 category: ui-motion
-order: 2
-cover: /work/deepgram/voices.webp
+order: 1
+cover: /work/deepgram/thumb.webp
+coverVideo: /work/deepgram/thumb.mp4
 rive:
   - src: /rive/deepgram/voices.riv
     label: Deepgram Voices demo. Select an avatar to hear its voice.

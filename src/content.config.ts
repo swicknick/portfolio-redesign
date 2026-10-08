@@ -13,6 +13,7 @@ const work = defineCollection({
     category: z.enum(['featured', 'ui-motion', 'product', 'motion', 'concept']),
     order: z.number(),
     cover: z.string().optional(),
+    coverVideo: z.string().optional(), // muted loop shown on the home card; cover is its poster
     draft: z.boolean().default(false),
     rive: z
       .array(

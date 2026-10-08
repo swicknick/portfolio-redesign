@@ -5,7 +5,7 @@ role: Designer & builder
 year: 2026
 tools: [Claude Code, Python, WebGL, After Effects]
 category: product
-order: 4
+order: 5
 ---
 
 ## The problem

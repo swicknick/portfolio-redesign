@@ -5,7 +5,7 @@ role: Motion Designer & Illustrator
 year: 2025
 tools: [Rive]
 category: motion
-order: 6
+order: 2
 cover: /work/shep/illo-1.webp
 ---
 
