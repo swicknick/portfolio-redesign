@@ -78,3 +78,23 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 | The Mom Project | 29% → 100%: resume, headline, 5–8 yrs, industries, talents, skills, Webstacks + Variable Medium, prefs (fully remote, all contract types, $60/hr or $100K floor) |
 | Onward Search | Resume, phone, W-2 yes, 2 weeks' notice, remote + hybrid, perm/contract/C2H, $120K target / $100K min, $70 target / $60 min |
 | 24 Seven | Not done: site hung on login |
+
+## Run 2026-10-08 (floor lowered to $80K)
+Searched: company boards (`job-scan.py`, 46 hits) and LinkedIn, sweeping every blitz title for remote US plus Portland metro, past month (63 relevant listings, most already ruled out on 10-07).
+
+**Proposed batch (waiting on Nicholas)**
+| Company | Role | Pay | Link | Notes |
+|---|---|---|---|---|
+| Unity | Senior Graphic & Motion Designer (Brand Studio) | $87–166K by zone | https://www.linkedin.com/jobs/view/4467868854/ | Remote US, ~2 wks old. Brand + motion for a tech platform. |
+| MyPrize | Motion & Interactive Brand Designer | not listed | https://www.linkedin.com/jobs/view/4468694404/ | Remote-first; "Rive is your primary tool"; brand + product UI motion. Social gaming/sweepstakes platform. ~3 wks old. |
+| Wpromote | Digital & Motion Designer | $74–95K | https://www.linkedin.com/jobs/view/4472095998/ | Remote US. Newly in range with the $80K floor. Leans performance-marketing ads. |
+| Netflix | Senior Motion Designer, Live | not listed | https://www.linkedin.com/jobs/view/4459277407/ | Remote US, but asks 10+ yrs of live/broadcast graphics. Stretch. |
+
+**Skipped this run**
+- Strava Senior Designer, Motion ($145–160K): hybrid, 3 days in SF/NYC.
+- Culture Amp Lead Brand Designer (Motion/Video): hybrid SF. Hinge Health Senior/Lead Motion: hybrid SF.
+- The Heist (Chicago, Mon–Thu in office), Zipline (on-site), Carousel (on-site San Diego), Stash Media (on-site SF), Life.Church (on-site OK).
+- US Tech Solutions Sr Motion Designer ($80–90/hr): on-site SF events contract.
+- Weight Watchers, Northern Trust, Lessen, Odoo: hybrid outside the area. 24 Seven Sr Motion Graphics: on-site Irvine.
+- Wiraa Digital & Motion Designer: aggregator repost of a performance-marketing role. Morley: remote but no pay listed, agency comms.
+- Zapier Sr Motion Designer: EMEA only. Design Engineer roles: still need front-end engineering.
