@@ -46,8 +46,8 @@ const work = defineCollection({
       .default([]),
     howItWorks: z
       .object({
-        title: z.string(),
-        steps: z.array(z.object({ title: z.string(), text: z.string() })),
+        label: z.string(),
+        notes: z.array(z.object({ title: z.string(), text: z.string() })),
       })
       .optional(),
   }),

@@ -8,20 +8,21 @@ category: motion
 order: 7
 cover: /work/materialize/ingestion-poster.webp
 howItWorks:
-  title: How Materialize Works
-  steps:
-    - title: Integrate data from disparate systems
-      text: Point Materialize at your operational databases, event/queue systems, and services. Sources will appear as continually updating tables in Materialize with sub-second freshness.
-    - title: Define views in SQL
-      text: Create views that join, aggregate, and shape raw tables into canonical business objects. A common pattern is a medallion architecture that translates source tables from bronze (raw) to silver (intermediate) to gold (final) data products.
-    - title: Index views to create data flows
-      text: In a traditional database, you would index a table to speed up queries. In Materialize, you index the views themselves. When you do the Materialize optimizer creates dataflows, or computational graphs, that do the minimum amount of work as writes come in to keep views correctly and continually up to date. Now reactive, or pull based computation, becomes proactive and push based.
-    - title: Strong consistency across the entire system
-      text: Materializes uses virtual time to ensure all objects are coordinated from a single clock. The system moves from one consistent state to another, reflecting things like transaction boundaries in up stream systems, even when views that are hundreds of layers deep.
-    - title: Agentic feedback loops are now possible
-      text: Expose "gold" data products via MCP to give agents access to a semantic representation of your business. They can take the results of data products as-is, or use SQL to apply additional transformations on-the-fly. This lets them observe the world, think, and take action. Because Materialize can show how the results of those actions impact any other view in the system with sub-second latency, agents can now see the results of their own actions, quickly course correct, and take further actions to proceed toward their goal.
-    - title: Make live data available across your entire stack
-      text: Push all transformed updates to downstream system like Kafka and Apache Iceberg or subscribe to an interesting subset. You can also take a pull-based approach and query data from Materialize using standard Postgres drivers. While Materialize doesn't have the fastest query engine, because it can do so much work up front, the end-to-end latency for reflecting the result of updates is usually far better than even OLAP systems.
+  label: Scroll-driven explainer · built for materialize.com
+  notes:
+    - title: Start with one thing
+      text: The first state lights up only the sources, databases, and raw tables. Everything else waits at 10% opacity, so there's exactly one place for the eye to go.
+    - title: One new idea per step
+      text: Each step adds a single concept. Here the intermediate and published tiers connect to the raw tables, and the first callout appears. Nobody has to parse two new things at once.
+    - title: Dim, don't delete
+      text: Earlier parts fade back instead of disappearing, so the whole system stays on screen as context and the viewer never loses their place.
+    - title: Motion only where it means something
+      text: The only looping animation lives in this step, a turning clock and boxes that change color in sync, because this step is about time and consistency. Everywhere else, stillness keeps the focus on structure.
+    - title: Let direction tell the story
+      text: When agents enter, their lines run from the MCP server back to the source systems. The loop explains the feedback idea before a word of copy is read.
+    - title: Land on the full picture
+      text: The last state is the complete architecture, earned step by step, so it reads as a summary instead of a wall of boxes. Built as six static states with a 300 ms crossfade, it stays light on the page and easy to update.
+
 ---
 
 ## The problem
