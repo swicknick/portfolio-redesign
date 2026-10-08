@@ -9,9 +9,11 @@ order: 3
 cover: /work/evaluate/live-trading.webp
 ---
 
+## Your first trade, in 54 seconds
+Multi-collection trading was new, so new users needed to see it before they'd try it. This onboarding video walks through a real trade from start to finish: find a partner, pick items from both sides, chat, and send an offer.
+
 <figure>
   <video controls playsinline preload="none" poster="/work/evaluate/onboarding-video-poster.webp" width="1280" height="720" src="/work/evaluate/onboarding-video.mp4" aria-label="Evaluate onboarding video"></video>
-  <figcaption>The onboarding video (54 s).</figcaption>
 </figure>
 
 ## The problem
