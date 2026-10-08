@@ -36,7 +36,7 @@ const groups = [
         return (
           items.length > 0 && (
             <div class="group">
-              <h3 class="eyebrow">{g.label}</h3>
+              <h2 class="eyebrow group-label">{g.label}</h2>
               <div class="grid">
                 {items.map((w) => (
                   <a href={`/work/${w.id}`} class="card">
@@ -56,7 +56,7 @@ const groups = [
                         w.data.cover && <img src={w.data.cover} alt="" loading="lazy" decoding="async" />
                       )}
                     </div>
-                    <h4>{w.data.title}</h4>
+                    <h3>{w.data.title}</h3>
                     <p>{w.data.summary}</p>
                     <span class="meta">
                       {w.data.role} · {w.data.year}
@@ -134,7 +134,10 @@ const groups = [
   .card:hover .thumb {
     transform: translateY(-4px);
   }
-  .card h4 {
+  .group-label {
+    margin: 12px 0;
+  }
+  .card h3 {
     font-size: 20px;
     margin: 16px 0 6px;
   }
