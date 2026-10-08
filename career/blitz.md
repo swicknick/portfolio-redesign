@@ -42,7 +42,7 @@ Nicholas wants a **full blitz**: every channel, as fast as possible. Read `plan.
   - Variable Medium: Junior Designer (Product UI & Motion), Jan 2021 – Dec 2024.
   - Freelance: 2022 – present.
   - Use the bullets from `build.py`.
-- **Featured:** reel (vimeo.com/1189183155) and the Stroke Center plugin.
+- **Featured:** reel (nicholasrode.com/reel) and the Stroke Center plugin.
 - **Skills:** the top 5 are Rive, Lottie, After Effects, Motion Design, UI Animation.
 - **Job alerts:** daily alerts for each title, Remote (US) and Portland metro.
 - **Applying:** Easy Apply to roles that pass the filters. Use the resume PDF `career/resume/Nicholas-Rode-Resume.pdf`.
@@ -95,4 +95,4 @@ Check their careers pages:
 ## Each application
 - **Resume:** `career/resume/Nicholas-Rode-Resume.pdf`. If a role leans heavily one way (for example Rive or B2B SaaS), tweak `SUMMARY` in `build.py`, rebuild, and save a copy named for the company.
 - **Short note**, 3–4 sentences: why this company, the one most relevant proof point, and the reel link.
-- **Portfolio link:** https://nicholasrode.framer.website/ until the new site is live.
+- **Portfolio link:** https://nicholasrode.com (reel: https://nicholasrode.com/reel).
