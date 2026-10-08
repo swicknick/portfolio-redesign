@@ -9,6 +9,11 @@ order: 3
 cover: /work/evaluate/live-trading.webp
 ---
 
+<figure>
+  <video controls playsinline preload="none" poster="/work/evaluate/onboarding-video-poster.webp" width="1280" height="720" src="/work/evaluate/onboarding-video.mp4" aria-label="Evaluate onboarding video"></video>
+  <figcaption>The onboarding video (54 s).</figcaption>
+</figure>
+
 ## The problem
 Trading NFTs person to person was confusing and risky. Evaluate let people trade **across multiple collections** on the Flow blockchain, something new that people had to understand before they'd trust it.
 
@@ -69,11 +74,5 @@ Trading was multi-step and complex, so I made a short video that stripped the UI
   <img src="/work/evaluate/onboarding-before-after.webp" alt="Full app UI simplified into onboarding-video frames" width="1600" height="972" loading="lazy" decoding="async" />
   <figcaption>From the full UI to only what a new trader needs to see.</figcaption>
 </figure>
-
-<figure>
-  <video controls playsinline preload="none" poster="/work/evaluate/onboarding-video-poster.webp" width="1280" height="720" src="/work/evaluate/onboarding-video.mp4" aria-label="Evaluate onboarding video"></video>
-  <figcaption>The onboarding video (54 s).</figcaption>
-</figure>
-
 ## Outcome
 The app launched, with the website, trading product, and onboarding video shipped together.
