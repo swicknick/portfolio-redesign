@@ -1,6 +1,6 @@
 # Job search blitz: playbook for the browser session
 
-Nicholas wants a **full blitz**: every channel, as fast as possible. Read `plan.md`, `career/applications.md`, and the resume source `career/resume-styles/build.py` first.
+Nicholas wants a **full blitz**: every channel, as fast as possible. Read `plan.md`, `career/applications.md`, and the resume source `career/resume/build.py` first.
 
 ## Ground rules
 1. **Confidential.** Nicholas still works at Webstacks.
@@ -45,7 +45,7 @@ Nicholas wants a **full blitz**: every channel, as fast as possible. Read `plan.
 - **Featured:** reel (vimeo.com/1189183155) and the Stroke Center plugin.
 - **Skills:** the top 5 are Rive, Lottie, After Effects, Motion Design, UI Animation.
 - **Job alerts:** daily alerts for each title, Remote (US) and Portland metro.
-- **Applying:** Easy Apply to roles that pass the filters. Use the resume PDF `career/resume-styles/2-product-tech.pdf`.
+- **Applying:** Easy Apply to roles that pass the filters. Use the resume PDF `career/resume/Nicholas-Rode-Resume.pdf`.
 - **Recruiters:** look for in-house tech recruiters at good-fit companies. Draft short connection notes and get approval before sending.
 
 ## 2. Job boards (logged in where it helps)

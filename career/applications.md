@@ -31,7 +31,7 @@ Status: **open** means verified open on the company's own board that day.
 | 2026-10-07 | Instrument (Portland) | General Application, Motion Designer (contract), remote US, $60–105/hr — https://jobs.lever.co/instrument/f81bfe66-3833-4028-af91-c4b1becebd2d | 2-product-tech.pdf (with Lighthouse 40→99) | No (form questions only; rate given as $70–85/hr target) | Submitted, approved by Nicholas; check ~2026-10-21 |
 
 ## Handoff for the browser session (2026-10-07)
-- **Resume:** `career/resume-styles/2-product-tech.pdf`. Rebuild with `python3 career/resume-styles/build.py` if the text changes.
+- **Resume:** `career/resume/Nicholas-Rode-Resume.pdf`. Rebuild with `python3 career/resume/build.py` if the text changes.
 - **Rules:** fill in application forms in Nicholas's Chrome, but **he reviews and clicks Submit himself**. Never share his current rate. Pay targets are in `plan.md`. The search is confidential, so nothing should reach his employer (Webstacks).
 - **Next:**
   1. Nicholas finds the shortlist above too generic. He wants fresher, less-reposted roles.

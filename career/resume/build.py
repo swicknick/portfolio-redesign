@@ -1,11 +1,12 @@
-"""Build the resume in three styles from one content source.
+"""Build the resume from this one content source.
 
-    python3 career/resume-styles/build.py
+    python3 career/resume/build.py
 
-Writes <style>.html next to this file. Print them to PDF with Chrome
-(or see the README in this folder).
+Writes Nicholas-Rode-Resume.html and exports Nicholas-Rode-Resume.pdf next to it
+(headless Chrome). Edit the text below, rerun, and both stay in sync.
 """
 
+import subprocess
 from html import escape
 from pathlib import Path
 
@@ -14,7 +15,7 @@ OUT = Path(__file__).parent
 NAME = "Nicholas Rode"
 TITLE = "Motion Designer & Engineer"
 CONTACT = ["theniceguynick@gmail.com", "281.794.1242", "Vancouver, WA 98683"]
-LINKS = [("Portfolio", "https://nicholasrode.com"), ("Motion Reel", "https://vimeo.com/1189183155")]
+LINKS = [("Portfolio", "https://nicholasrode.com"), ("Reel", "https://nicholasrode.com/reel")]
 
 SUMMARY = (
     "Motion designer and engineer with 5+ years of experience shipping motion for B2B SaaS and tech brands. "
@@ -153,56 +154,6 @@ def single_column(css, fonts):
 </div></body></html>"""
 
 
-def two_column(css, fonts):
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
-<title>{NAME} Resume</title>
-<link href="https://fonts.googleapis.com/css2?{fonts}&display=swap" rel="stylesheet">
-<style>{BASE_CSS}{css}</style></head><body><div class="page">
-<header>
-  <h1>{e(NAME)}</h1>
-  <p class="title">{e(TITLE)}</p>
-</header>
-<div class="cols">
-  <aside>
-    <section><h2>Contact</h2>{"".join(f"<p>{e(c)}</p>" for c in CONTACT)}<p>{links_html()}</p></section>
-    <section><h2>Skills</h2>{"".join(f'<div class="skill"><h4>{e(k)}</h4><p>{e(v)}</p></div>' for k, v in SKILLS)}</section>
-    <section><h2>Education</h2>{edu_html()}</section>
-  </aside>
-  <main>
-    <section><p class="summary">{e(SUMMARY)}</p></section>
-    <section><h2>Experience</h2>{jobs_html()}</section>
-    <section><h2>Tools I've Built</h2>{tools_html()}</section>
-    <section><h2>Courses</h2>{courses_html()}</section>
-  </main>
-</div>
-</div></body></html>"""
-
-
-# 1. Swiss minimal: single column, ATS-safe, black + purple accent (your current resume's color)
-SWISS = """
-body { font-family: 'Inter', Arial, sans-serif; color: #18181b; font-size: 9.2pt; line-height: 1.38; }
-.page { padding: 0.45in 0.6in; }
-header { border-bottom: 2px solid #18181b; padding-bottom: 12px; margin-bottom: 4px; }
-h1 { font-size: 30pt; font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
-.title { font-size: 12.5pt; color: #5b21b6; font-weight: 600; margin-top: 6px; }
-.contact { color: #52525b; margin-top: 6px; font-size: 9pt; }
-.contact a { color: #5b21b6; }
-section { margin-top: 10px; }
-h2 { font-size: 8.5pt; font-weight: 700; text-transform: uppercase; color: #5b21b6; margin-bottom: 5px; }
-.summary { color: #27272a; }
-.skill, .tool { margin-bottom: 2px; }
-.job { margin-bottom: 6px; }
-.job-head { display: flex; justify-content: space-between; align-items: baseline; }
-h3 { font-size: 10.5pt; font-weight: 600; }
-.org { font-weight: 600; color: #5b21b6; }
-.dates { color: #71717a; font-size: 9pt; white-space: nowrap; }
-.note { color: #71717a; font-style: italic; font-size: 9pt; }
-li { margin-top: 1px; }
-.split { display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; }
-.split ul { padding-left: 1em; }
-"""
-
-# 2. Product / tech: single column, ATS-safe, mono metadata, navy accent
 TECH = """
 body { font-family: 'Inter', Arial, sans-serif; color: #0a0a0a; font-size: 9.4pt; line-height: 1.38; }
 .page { padding: 0.4in 0.6in 0.35in; }
@@ -227,46 +178,23 @@ li::marker { color: #1e3a8a; }
 """
 
 # 3. Editorial two-column: serif display + sidebar. For sending directly to people, not ATS forms.
-EDITORIAL = """
-body { font-family: 'DM Sans', Arial, sans-serif; color: #1c1917; font-size: 8.8pt; line-height: 1.4; background: #fff; }
-.page { display: flex; flex-direction: column; }
-header { background: #1c1917; color: #fafaf9; padding: 0.42in 0.6in 0.3in; }
-h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 44pt; line-height: 0.95; letter-spacing: -0.01em; }
-.title { font-size: 11pt; color: #fdba74; margin-top: 8px; }
-.cols { display: grid; grid-template-columns: 2.35in 1fr; flex: 1; }
-aside { background: #f5f5f4; padding: 0.3in 0.3in 0.3in 0.6in; }
-main { padding: 0.3in 0.6in 0.3in 0.35in; }
-section { margin-bottom: 11px; }
-h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 15pt; color: #c2410c; margin-bottom: 5px; }
-aside p { margin-bottom: 2px; }
-aside a { color: #c2410c; }
-.skill { margin-bottom: 6px; }
-h4 { margin: 0; font-size: 8.8pt; }
-aside ul { padding-left: 1em; }
-aside li { margin-bottom: 3px; }
-.summary { font-family: 'Instrument Serif', Georgia, serif; font-size: 12.5pt; line-height: 1.28; }
-.job { margin-bottom: 9px; }
-.job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-h3 { font-size: 10.2pt; font-weight: 700; }
-.org { color: #c2410c; }
-.dates { font-size: 8.4pt; color: #78716c; white-space: nowrap; }
-.note { color: #78716c; font-style: italic; }
-li { margin-top: 1px; }
-.tool { margin-bottom: 4px; }
-"""
-
 ROWS_CSS = """
 .edu { display: flex; justify-content: space-between; gap: 8px; }
 .course { margin-bottom: 1px; }
 """
 
-STYLES = {
-    "1-swiss-minimal": single_column(SWISS + ROWS_CSS, "family=Inter:wght@400;600;700"),
-    "2-product-tech": single_column(TECH + ROWS_CSS, "family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500"),
-    "3-editorial-two-column": two_column(EDITORIAL + ROWS_CSS, "family=DM+Sans:wght@400;700&family=Instrument+Serif"),
-}
+CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+NAME_OUT = "Nicholas-Rode-Resume"
 
 if __name__ == "__main__":
-    for name, html in STYLES.items():
-        (OUT / f"{name}.html").write_text(html)
-        print("wrote", name)
+    html_path = OUT / f"{NAME_OUT}.html"
+    html_path.write_text(
+        single_column(TECH + ROWS_CSS, "family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500")
+    )
+    print("wrote", html_path.name)
+    subprocess.run(
+        [CHROME, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", "--virtual-time-budget=3000",
+         f"--print-to-pdf={OUT / (NAME_OUT + '.pdf')}", html_path.resolve().as_uri()],
+        check=True, capture_output=True,
+    )
+    print("wrote", NAME_OUT + ".pdf")
