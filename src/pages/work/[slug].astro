@@ -31,7 +31,7 @@ const { title, summary, role, year, tools, rive, howItWorks } = entry.data;
         <section class="live-demos">
           <p class="eyebrow">Live · try it</p>
           <div class="demo-grid">
-            {rive.map((r) => <RiveEmbed {...r} />)}
+            {rive.map((r, i) => <RiveEmbed {...r} priority={i === 0} />)}
           </div>
         </section>
       )

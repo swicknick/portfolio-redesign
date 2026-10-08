@@ -20,6 +20,7 @@ interface Props {
   wide?: boolean;
   pause?: Pause;
   hotspots?: { x: number; y: number; r: number }[];
+  priority?: boolean; // first thing on screen: load the poster right away
 }
 
 const {
@@ -33,13 +34,25 @@ const {
   wide,
   pause,
   hotspots,
+  priority,
 } = Astro.props;
 const spots = [...(hotspots ?? []), ...(pause ? [{ x: pause.x, y: pause.y, r: pause.d / 2 }] : [])];
 ---
 
 <figure class:list={['rive', { wide }]}>
   <div class="stage" style={`aspect-ratio: ${ratio}`}>
-    {poster && <img class="poster" src={poster} alt="" loading="lazy" decoding="async" />}
+    {
+      poster && (
+        <img
+          class="poster"
+          src={poster}
+          alt=""
+          loading={priority ? 'eager' : 'lazy'}
+          fetchpriority={priority ? 'high' : undefined}
+          decoding="async"
+        />
+      )
+    }
     <canvas
       data-rive={src}
       data-sm={stateMachine}
