@@ -29,7 +29,7 @@ howItWorks:
 Materialize turns live data streams into queryable, real-time results. That's hard to picture, and harder to sell if people can't picture it.
 
 <figure>
-  <video controls playsinline preload="metadata" poster="/work/materialize/site-hero-poster.webp" width="1920" height="1080" src="/work/materialize/site-hero-original.mp4" aria-label="Materialize homepage hero animation"></video>
+  <video data-loop autoplay muted loop playsinline preload="auto" poster="/work/materialize/site-hero-poster.webp" width="1920" height="1080" src="/work/materialize/site-hero-original.mp4" aria-label="Materialize homepage hero animation"></video>
   <figcaption>The hero animation on the live site.</figcaption>
 </figure>
 
