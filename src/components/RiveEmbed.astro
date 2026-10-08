@@ -224,8 +224,16 @@ const spots = [...(hotspots ?? []), ...(pause ? [{ x: pause.x, y: pause.y, r: pa
   // sound and animation never drift apart.
   let pausedResume: (() => void) | null = null;
 
+  // Files boot one at a time: each decode is heavy, and stacking them froze scrolling.
+  let queue = Promise.resolve();
+  const enqueue = (canvas: HTMLCanvasElement) => {
+    queue = queue.then(() => boot(canvas)).catch(() => {});
+  };
+
   async function boot(canvas: HTMLCanvasElement) {
     const { Rive, Layout, Fit, Alignment, RuntimeLoader } = await load();
+    let loaded: () => void;
+    const ready = new Promise<void>((res) => (loaded = res));
     RuntimeLoader.setWasmUrl(wasmUrl); // self-hosted, version-matched; no third-party CDN
     const stage = canvas.parentElement!;
     const sm = canvas.dataset.sm;
@@ -250,7 +258,9 @@ const spots = [...(hotspots ?? []), ...(pause ? [{ x: pause.x, y: pause.y, r: pa
         if (!sm && r.stateMachineNames.length) r.play(r.stateMachineNames[0]);
         r.resizeDrawingSurfaceToCanvas();
         stage.classList.add('live');
+        loaded();
       },
+      onLoadError: () => loaded(),
     });
 
     function setPaused(on: boolean) {
@@ -316,6 +326,9 @@ const spots = [...(hotspots ?? []), ...(pause ? [{ x: pause.x, y: pause.y, r: pa
       if (pause && state === pause.state) return;
       e.isIntersecting ? r.play() : r.pause();
     }).observe(canvas);
+
+    await ready;
+    await frame(); // let the page paint and scroll between files
   }
 
   const near = new IntersectionObserver(
@@ -331,23 +344,28 @@ const spots = [...(hotspots ?? []), ...(pause ? [{ x: pause.x, y: pause.y, r: pa
             'click',
             () => {
               btn.hidden = true;
-              boot(canvas);
+              enqueue(canvas);
             },
             { once: true },
           );
         } else {
-          boot(canvas);
+          enqueue(canvas);
         }
       }
     },
     { rootMargin: '200px' },
   );
 
-  // Start watching only after the page has loaded, so the renderer never competes with first paint.
+  // Start only after the page has loaded and the visitor first moves, scrolls, touches or types,
+  // so the runtime never competes with first paint or a page that's just sitting there.
   const watch = () =>
     document.querySelectorAll<HTMLCanvasElement>('canvas[data-rive]').forEach((c) => near.observe(c));
-  const idle = (fn: () => void) =>
-    'requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200);
-  if (document.readyState === 'complete') idle(watch);
-  else addEventListener('load', () => idle(watch), { once: true });
+  const intents = ['pointermove', 'pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown'];
+  const onIntent = () => {
+    intents.forEach((t) => removeEventListener(t, onIntent));
+    watch();
+  };
+  const arm = () => intents.forEach((t) => addEventListener(t, onIntent, { passive: true }));
+  if (document.readyState === 'complete') arm();
+  else addEventListener('load', arm, { once: true });
 </script>
