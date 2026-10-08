@@ -25,6 +25,9 @@ const work = defineCollection({
           artboard: z.string().optional(),
           poster: z.string().optional(),
           wide: z.boolean().optional(),
+          // Clickable areas (fractions of artboard width/height; r is a fraction of width), used
+          // to show a pointer cursor. The runtime has no hit-test API, so these are measured.
+          hotspots: z.array(z.object({ x: z.number(), y: z.number(), r: z.number() })).optional(),
           // Adds play/pause to a file that only has "play": the button's hotspot (fractions of the
           // artboard width/height), the state that means "playing", and the colors of the play icon.
           pause: z

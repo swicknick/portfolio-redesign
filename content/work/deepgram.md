@@ -15,6 +15,14 @@ rive:
     poster: /work/deepgram/voices.webp
     stateMachine: State Machine 1
     wide: true
+    hotspots: # clickable avatars: Andromeda, Atlas, Arcas, Thalia, Odysseus, Luna, Aries
+      - { x: 0.3179, y: 0.1966, r: 0.055 }
+      - { x: 0.5938, y: 0.1966, r: 0.055 }
+      - { x: 0.4138, y: 0.5131, r: 0.055 }
+      - { x: 0.5539, y: 0.5131, r: 0.055 }
+      - { x: 0.6875, y: 0.5131, r: 0.055 }
+      - { x: 0.4450, y: 0.8071, r: 0.055 }
+      - { x: 0.7134, y: 0.8071, r: 0.055 }
   - src: /rive/deepgram/voice-to-text.riv
     label: Text-to-speech pronunciation demo with play controls and a highlighted transcript.
     caption: Pronunciation. Press play and the transcript follows the audio; press again to pause.

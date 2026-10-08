@@ -61,7 +61,7 @@ const { title, summary, role, year, tools, rive, scroll } = entry.data;
       (entries) => {
         for (const e of entries) {
           const v = e.target as HTMLVideoElement;
-          if (e.isIntersecting) v.play().catch(() => {});
+          if (e.isIntersecting) v.play().catch(() => (v.controls = true)); // autoplay blocked: let them start it
           else v.pause();
         }
       },

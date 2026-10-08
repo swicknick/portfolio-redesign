@@ -19,10 +19,22 @@ interface Props {
   caption?: string;
   wide?: boolean;
   pause?: Pause;
+  hotspots?: { x: number; y: number; r: number }[];
 }
 
-const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, wide, pause } =
-  Astro.props;
+const {
+  src,
+  label,
+  stateMachine,
+  artboard,
+  ratio = '16 / 9',
+  poster,
+  caption,
+  wide,
+  pause,
+  hotspots,
+} = Astro.props;
+const spots = [...(hotspots ?? []), ...(pause ? [{ x: pause.x, y: pause.y, r: pause.d / 2 }] : [])];
 ---
 
 <figure class:list={['rive', { wide }]}>
@@ -33,6 +45,7 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
       data-sm={stateMachine}
       data-artboard={artboard}
       data-pause={pause ? JSON.stringify(pause) : undefined}
+      data-spots={spots.length ? JSON.stringify(spots) : undefined}
       role="img"
       aria-label={label}
     ></canvas>
@@ -138,6 +151,70 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
   }
   const suspendAudio = () => audio.forEach((c) => c.suspend());
   const resumeAudio = () => audio.forEach((c) => c.resume());
+  const frame = () => new Promise<void>((r) => requestAnimationFrame(() => r()));
+
+  // Browsers keep audio locked until a user gesture, and Rive only unlocks after its own async
+  // check, which finishes after the press that triggers a sound. That made the first click
+  // silent. So the first press on any demo is held, audio is unlocked, and the press is replayed.
+  let audioReady = false;
+  async function unlockThenReplay(canvas: HTMLCanvasElement, x: number, y: number) {
+    resumeAudio();
+    await Promise.all([...audio].map((c) => c.resume().catch(() => {})));
+    await frame();
+    await frame();
+    audioReady = true;
+    const init = { bubbles: true, cancelable: true, clientX: x, clientY: y, button: 0, view: window };
+    canvas.dispatchEvent(new MouseEvent('mousedown', { ...init, buttons: 1 }));
+    canvas.dispatchEvent(new MouseEvent('mouseup', init));
+  }
+
+  function gateFirstPress(canvas: HTMLCanvasElement) {
+    canvas.addEventListener(
+      'mousedown',
+      (e) => {
+        if (audioReady || !e.isTrusted) return;
+        e.stopImmediatePropagation();
+        unlockThenReplay(canvas, e.clientX, e.clientY);
+      },
+      { capture: true },
+    );
+    canvas.addEventListener(
+      'mouseup',
+      (e) => {
+        if (!audioReady && e.isTrusted) e.stopImmediatePropagation();
+      },
+      { capture: true },
+    );
+    // Touch: hold the tap until it ends (the gesture browsers accept), unless it became a scroll.
+    let start: { x: number; y: number } | null = null;
+    const block = (e: TouchEvent) => {
+      if (!audioReady) e.stopImmediatePropagation();
+    };
+    canvas.addEventListener(
+      'touchstart',
+      (e) => {
+        if (audioReady) return;
+        const t = e.touches[0];
+        start = { x: t.clientX, y: t.clientY };
+        e.stopImmediatePropagation();
+      },
+      { capture: true, passive: true },
+    );
+    canvas.addEventListener('touchmove', block, { capture: true, passive: true });
+    canvas.addEventListener(
+      'touchend',
+      (e) => {
+        if (audioReady || !start) return;
+        e.stopImmediatePropagation();
+        const t = e.changedTouches[0];
+        const moved = Math.hypot(t.clientX - start.x, t.clientY - start.y) > 10;
+        const { x, y } = start;
+        start = null;
+        if (!moved) unlockThenReplay(canvas, x, y);
+      },
+      { capture: true },
+    );
+  }
 
   // Rive Renderer (WebGL2) so feathering and the rest render exactly as authored in the editor.
   let runtime: Promise<typeof import('@rive-app/webgl2')> | undefined;
@@ -190,17 +267,45 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
       }
     }
 
-    canvas.addEventListener('pointerdown', () => {
-      if (pausedResume && !userPaused) pausedResume();
-    });
+    gateFirstPress(canvas);
+
+    // Fraction-of-width distance from a point to a spot, so circles stay round at any size.
+    const hit = (cx: number, cy: number, s: { x: number; y: number; r: number }) => {
+      const b = canvas.getBoundingClientRect();
+      const dx = (cx - b.left) / b.width - s.x;
+      const dy = ((cy - b.top) / b.height - s.y) * (b.height / b.width);
+      return Math.hypot(dx, dy) <= s.r;
+    };
+
+    // Pointer cursor over the file's clickable elements.
+    const spots: { x: number; y: number; r: number }[] = canvas.dataset.spots
+      ? JSON.parse(canvas.dataset.spots)
+      : [];
+    if (spots.length) {
+      canvas.addEventListener('mousemove', (e) => {
+        canvas.style.cursor = spots.some((s) => hit(e.clientX, e.clientY, s)) ? 'pointer' : '';
+      });
+      canvas.addEventListener('mouseleave', () => (canvas.style.cursor = ''));
+    }
+
+    // Decide play vs pause from the state at the moment of the press, before Rive reacts to it.
+    // (Deciding on "click" saw the state Rive had just switched to, so one press played and paused.)
+    let pressedWhilePlaying = false;
+    canvas.addEventListener(
+      'pointerdown',
+      (e) => {
+        if (pausedResume && !userPaused) pausedResume();
+        pressedWhilePlaying =
+          !!pause && state === pause.state && hit(e.clientX, e.clientY, { x: pause.x, y: pause.y, r: pause.d / 2 });
+        if (audioReady && !userPaused) resumeAudio();
+      },
+      { capture: true },
+    );
 
     if (pause) {
-      canvas.addEventListener('click', (e) => {
-        if (state !== pause.state) return; // not playing: the file's own play button handles it
-        const b = canvas.getBoundingClientRect();
-        const dx = (e.clientX - b.left) / b.width - pause.x;
-        const dy = ((e.clientY - b.top) / b.height - pause.y) * (b.height / b.width);
-        if (Math.hypot(dx, dy) <= pause.d / 2) setPaused(!userPaused);
+      canvas.addEventListener('pointerup', () => {
+        if (pressedWhilePlaying) setPaused(!userPaused);
+        pressedWhilePlaying = false;
       });
     }
 
