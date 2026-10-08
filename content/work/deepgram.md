@@ -5,7 +5,7 @@ role: Interactive Motion Designer & Developer
 year: 2025
 tools: [Rive]
 category: ui-motion
-order: 1
+order: 2
 cover: /work/deepgram/thumb.webp
 coverVideo: /work/deepgram/thumb.mp4
 rive:

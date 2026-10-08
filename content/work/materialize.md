@@ -5,7 +5,7 @@ role: Motion Designer & Illustrator
 year: 2025
 tools: [After Effects, Lottie]
 category: motion
-order: 3
+order: 7
 cover: /work/materialize/ingestion-poster.webp
 scroll:
   - src: /lottie/materialize/getting-data-in.json

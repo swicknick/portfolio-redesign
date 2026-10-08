@@ -7,6 +7,13 @@ const work = (await getCollection('work', (w) => !w.data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
 );
 
+const groups = [
+  { key: 'ui-motion', label: 'Product UI motion' },
+  { key: 'product', label: 'Product' },
+  { key: 'motion', label: 'Explaining complex products' },
+  { key: 'concept', label: 'Concepts' },
+] as const;
+
 ---
 
 <Base>
@@ -39,36 +46,45 @@ const work = (await getCollection('work', (w) => !w.data.draft)).sort(
   </section>
 
   <section class="wrap" id="work">
-    <h2 class="eyebrow work-label">Work</h2>
-    <div class="grid">
-      {
-        work.map((w) => (
-          <a href={`/work/${w.id}`} class="card">
-            <div class="thumb">
-              {w.data.coverVideo ? (
-                <video
-                  data-thumb
-                  src={w.data.coverVideo}
-                  poster={w.data.cover}
-                  muted
-                  loop
-                  playsinline
-                  preload="none"
-                  aria-hidden="true"
-                />
-              ) : (
-                w.data.cover && <img src={w.data.cover} alt="" loading="lazy" decoding="async" />
-              )}
+    {
+      groups.map((g) => {
+        const items = work.filter((w) => w.data.category === g.key);
+        return (
+          items.length > 0 && (
+            <div class="group">
+              <h3 class="eyebrow">{g.label}</h3>
+              <div class="grid">
+                {items.map((w) => (
+                  <a href={`/work/${w.id}`} class="card">
+                    <div class="thumb">
+                      {w.data.coverVideo ? (
+                        <video
+                          data-thumb
+                          src={w.data.coverVideo}
+                          poster={w.data.cover}
+                          muted
+                          loop
+                          playsinline
+                          preload="none"
+                          aria-hidden="true"
+                        />
+                      ) : (
+                        w.data.cover && <img src={w.data.cover} alt="" loading="lazy" decoding="async" />
+                      )}
+                    </div>
+                    <h4>{w.data.title}</h4>
+                    <p>{w.data.summary}</p>
+                    <span class="meta">
+                      {w.data.role} · {w.data.year}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
-            <h3>{w.data.title}</h3>
-            <p>{w.data.summary}</p>
-            <span class="meta">
-              {w.data.role} · {w.data.year}
-            </span>
-          </a>
-        ))
-      }
-    </div>
+          )
+        );
+      })
+    }
   </section>
 </Base>
 
@@ -194,9 +210,8 @@ const work = (await getCollection('work', (w) => !w.data.draft)).sort(
   .more:hover {
     text-decoration: underline;
   }
-  .work-label {
-    margin: 96px 0 0;
-    font-weight: 400;
+  .group {
+    margin-top: 80px;
   }
   .grid {
     display: grid;
@@ -228,7 +243,7 @@ const work = (await getCollection('work', (w) => !w.data.draft)).sort(
   .card:hover .thumb {
     transform: translateY(-4px);
   }
-  .card h3 {
+  .card h4 {
     font-size: 20px;
     margin: 16px 0 6px;
   }
