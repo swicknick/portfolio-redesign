@@ -1,6 +1,14 @@
 ---
 // Interactive Rive file. The runtime and the .riv load only when the embed nears the viewport,
 // it pauses off-screen, and with reduced motion it waits for a click before playing.
+interface Pause {
+  state: string;
+  x: number;
+  y: number;
+  d: number;
+  fill: string;
+  icon: string;
+}
 interface Props {
   src: string;
   label: string;
@@ -10,21 +18,43 @@ interface Props {
   poster?: string;
   caption?: string;
   wide?: boolean;
+  pause?: Pause;
 }
 
-const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, wide } = Astro.props;
+const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, wide, pause } =
+  Astro.props;
 ---
 
-<figure class:list={["rive", { wide }]}>
+<figure class:list={['rive', { wide }]}>
   <div class="stage" style={`aspect-ratio: ${ratio}`}>
     {poster && <img class="poster" src={poster} alt="" loading="lazy" decoding="async" />}
     <canvas
       data-rive={src}
       data-sm={stateMachine}
       data-artboard={artboard}
+      data-pause={pause ? JSON.stringify(pause) : undefined}
       role="img"
       aria-label={label}
     ></canvas>
+    {
+      pause && (
+        <svg
+          class="paused-icon"
+          viewBox="0 0 80 80"
+          aria-hidden="true"
+          style={`left:${pause.x * 100}%;top:${pause.y * 100}%;width:${pause.d * 100}%`}
+        >
+          <circle cx="40" cy="40" r="40" fill={pause.fill} />
+          <path
+            d="M31 24 L56 40 L31 56 Z"
+            fill={pause.icon}
+            stroke={pause.icon}
+            stroke-width="3"
+            stroke-linejoin="round"
+          />
+        </svg>
+      )
+    }
     <button class="start" type="button" hidden>Play interactive demo</button>
   </div>
   {caption && <figcaption>{caption}</figcaption>}
@@ -59,6 +89,15 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
   .stage.live .poster {
     opacity: 0;
   }
+  .paused-icon {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    display: none;
+  }
+  .stage.paused .paused-icon {
+    display: block;
+  }
   .start {
     position: absolute;
     left: 50%;
@@ -82,16 +121,41 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
 
 <script>
   import wasmUrl from '@rive-app/webgl2/rive.wasm?url';
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Rive plays sound through Web Audio. Keep a handle on its AudioContext so a pause can freeze
+  // the sound and the animation on the same frame. Must run before the runtime loads.
+  const audio = new Set<AudioContext>();
+  const Native = window.AudioContext;
+  if (Native) {
+    window.AudioContext = class extends Native {
+      constructor(...args: ConstructorParameters<typeof AudioContext>) {
+        super(...args);
+        audio.add(this);
+      }
+    };
+  }
+  const suspendAudio = () => audio.forEach((c) => c.suspend());
+  const resumeAudio = () => audio.forEach((c) => c.resume());
+
   // Rive Renderer (WebGL2) so feathering and the rest render exactly as authored in the editor.
   let runtime: Promise<typeof import('@rive-app/webgl2')> | undefined;
   const load = () => (runtime ??= import('@rive-app/webgl2'));
+
+  // At most one embed is user-paused at a time. Touching another demo resumes it first, so its
+  // sound and animation never drift apart.
+  let pausedResume: (() => void) | null = null;
 
   async function boot(canvas: HTMLCanvasElement) {
     const { Rive, Layout, Fit, Alignment, RuntimeLoader } = await load();
     RuntimeLoader.setWasmUrl(wasmUrl); // self-hosted, version-matched; no third-party CDN
     const stage = canvas.parentElement!;
     const sm = canvas.dataset.sm;
+    const pause = canvas.dataset.pause ? JSON.parse(canvas.dataset.pause) : null;
+    let state = '';
+    let userPaused = false;
+
     const r = new Rive({
       src: canvas.dataset.rive!,
       canvas,
@@ -100,15 +164,51 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
       autoplay: true,
       useOffscreenRenderer: true,
       layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center }),
+      onStateChange: (e) => {
+        const names = e.data as string[];
+        if (names.length) state = names[names.length - 1];
+        if (pause && userPaused && state !== pause.state) setPaused(false);
+      },
       onLoad: () => {
         if (!sm && r.stateMachineNames.length) r.play(r.stateMachineNames[0]);
         r.resizeDrawingSurfaceToCanvas();
         stage.classList.add('live');
       },
     });
+
+    function setPaused(on: boolean) {
+      userPaused = on;
+      stage.classList.toggle('paused', on);
+      if (on) {
+        r.pause();
+        suspendAudio();
+        pausedResume = () => setPaused(false);
+      } else {
+        resumeAudio();
+        r.play();
+        pausedResume = null;
+      }
+    }
+
+    canvas.addEventListener('pointerdown', () => {
+      if (pausedResume && !userPaused) pausedResume();
+    });
+
+    if (pause) {
+      canvas.addEventListener('click', (e) => {
+        if (state !== pause.state) return; // not playing: the file's own play button handles it
+        const b = canvas.getBoundingClientRect();
+        const dx = (e.clientX - b.left) / b.width - pause.x;
+        const dy = ((e.clientY - b.top) / b.height - pause.y) * (b.height / b.width);
+        if (Math.hypot(dx, dy) <= pause.d / 2) setPaused(!userPaused);
+      });
+    }
+
     new ResizeObserver(() => r.resizeDrawingSurfaceToCanvas()).observe(canvas);
     new IntersectionObserver(([e]) => {
-      if (!stage.classList.contains('live')) return;
+      if (!stage.classList.contains('live') || userPaused) return;
+      // A playing soundtrack keeps running off-screen so sound and picture stay in sync.
+      if (pause && state === pause.state) return;
       e.isIntersecting ? r.play() : r.pause();
     }).observe(canvas);
   }
@@ -122,10 +222,14 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
         if (reduce) {
           const btn = canvas.parentElement!.querySelector<HTMLButtonElement>('.start')!;
           btn.hidden = false;
-          btn.addEventListener('click', () => {
-            btn.hidden = true;
-            boot(canvas);
-          }, { once: true });
+          btn.addEventListener(
+            'click',
+            () => {
+              btn.hidden = true;
+              boot(canvas);
+            },
+            { once: true },
+          );
         } else {
           boot(canvas);
         }
@@ -133,6 +237,7 @@ const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, w
     },
     { rootMargin: '200px' },
   );
+
   // Start watching only after the page has loaded, so the renderer never competes with first paint.
   const watch = () =>
     document.querySelectorAll<HTMLCanvasElement>('canvas[data-rive]').forEach((c) => near.observe(c));

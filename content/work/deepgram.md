@@ -17,10 +17,17 @@ rive:
     wide: true
   - src: /rive/deepgram/voice-to-text.riv
     label: Text-to-speech pronunciation demo with play controls and a highlighted transcript.
-    caption: Pronunciation. Press play and the transcript follows the audio.
+    caption: Pronunciation. Press play and the transcript follows the audio; press again to pause.
     ratio: 538 / 355
     stateMachine: State Machine 1
     poster: /work/deepgram/voice-to-text.webp
+    pause:
+      state: Karaoke Animation
+      x: 0.494
+      y: 0.7934
+      d: 0.0793
+      fill: '#e1e1e5'
+      icon: '#168559'
   - src: /rive/deepgram/voice-agent.riv
     label: Voice assistant ring animation.
     caption: Voice assistant. The ring that shows the agent is listening and speaking.

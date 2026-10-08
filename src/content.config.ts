@@ -25,6 +25,18 @@ const work = defineCollection({
           artboard: z.string().optional(),
           poster: z.string().optional(),
           wide: z.boolean().optional(),
+          // Adds play/pause to a file that only has "play": the button's hotspot (fractions of the
+          // artboard width/height), the state that means "playing", and the colors of the play icon.
+          pause: z
+            .object({
+              state: z.string(),
+              x: z.number(),
+              y: z.number(),
+              d: z.number(),
+              fill: z.string(),
+              icon: z.string(),
+            })
+            .optional(),
         }),
       )
       .default([]),
