@@ -14,7 +14,7 @@ OUT = Path(__file__).parent
 NAME = "Nicholas Rode"
 TITLE = "Motion Designer & Engineer"
 CONTACT = ["theniceguynick@gmail.com", "281.794.1242", "Vancouver, WA 98683"]
-LINKS = [("Portfolio", "https://nicholasrode.framer.website/"), ("Motion Reel", "https://vimeo.com/1189183155")]
+LINKS = [("Portfolio", "https://nicholasrode.com"), ("Motion Reel", "https://vimeo.com/1189183155")]
 
 SUMMARY = (
     "Motion designer and engineer with 5+ years of experience shipping motion for B2B SaaS and tech brands. "
