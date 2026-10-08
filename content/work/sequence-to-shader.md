@@ -4,8 +4,8 @@ summary: An AI-built tool that turns After Effects renders into tiny, measurably
 role: Designer & builder
 year: 2026
 tools: [Claude Code, Python, WebGL, After Effects]
-category: featured
-order: 1
+category: product
+order: 4
 ---
 
 ## The problem
@@ -31,15 +31,5 @@ The users are the **developers receiving the handoff**, so the output had to be 
 - **Honest numbers:** every handoff ships with a README reporting measured error and file size for *that* asset. No "looks close."
 - **Grain that looks real:** film grain is measured and rebuilt separately. It is stronger in shadows and partially correlated across color channels, because flat digital noise reads as fake.
 
-## Outcome
-[TODO: run on a personal (non-client) animation and fill in:]
-- Original sequence size: __ MB → shipped payload: __ KB
-- Measured error vs original: __%
-- Side-by-side comparison image / before-after video
-- Page load: video version __ s vs shader version __ s
-
-## What didn't work
-[TODO, in your words. Candidates: rebuilding from project-file colors (didn't match); judging quality by the error number alone (a blurry result can still score well, so a detail check was added); a bug in the default Python math library on Macs that silently gave wrong numbers.]
-
-## Links
-[TODO: GitHub repo / demo page / short screen recording of the workflow]
+## Status
+Built and used as an internal production tool. A public demo on a personal animation, with measured size and error numbers, is next.

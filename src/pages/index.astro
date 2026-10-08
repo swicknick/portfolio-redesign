@@ -3,8 +3,9 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ShaderHero from '../components/ShaderHero.astro';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
-const featured = work.find((w) => w.data.category === 'featured');
+const work = (await getCollection('work', (w) => !w.data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 
 const groups = [
   { key: 'ui-motion', label: 'Product UI motion' },
@@ -26,24 +27,20 @@ const groups = [
     </div>
   </ShaderHero>
 
-  {
-    featured && (
-      <section class="wrap">
-        <a href={`/work/${featured.id}`} class="featured reveal">
-          <div class="featured-media">
-            {/* TODO: live shader demo goes here */}
-            <span class="eyebrow">Live demo coming soon</span>
-          </div>
-          <div class="featured-body">
-            <p class="eyebrow">Featured · {featured.data.year}</p>
-            <h2>{featured.data.title}</h2>
-            <p>{featured.data.summary}</p>
-            <span class="more">Read the case study →</span>
-          </div>
-        </a>
-      </section>
-    )
-  }
+  <section class="wrap">
+    <a href="/reel" class="featured reveal">
+      <div class="featured-media">
+        <img src="/reel/poster.jpg" alt="Frame from Nicholas Rode's 2025 motion reel" width="1920" height="1080" />
+        <span class="play" aria-hidden="true">▶</span>
+      </div>
+      <div class="featured-body">
+        <p class="eyebrow">Showreel · 2025</p>
+        <h2>Motion reel</h2>
+        <p>Product UI motion, interactive Rive work, and brand animation for B2B SaaS and AI products.</p>
+        <span class="more">Watch the reel →</span>
+      </div>
+    </a>
+  </section>
 
   <section class="wrap" id="work">
     {
@@ -56,7 +53,9 @@ const groups = [
               <div class="grid">
                 {items.map((w) => (
                   <a href={`/work/${w.id}`} class="card">
-                    <div class="thumb" />
+                    <div class="thumb">
+                      {w.data.cover && <img src={w.data.cover} alt="" loading="lazy" decoding="async" />}
+                    </div>
                     <h4>{w.data.title}</h4>
                     <p>{w.data.summary}</p>
                     <span class="meta">
@@ -102,13 +101,34 @@ const groups = [
     animation-delay: 0.1s;
   }
   .featured-media {
+    position: relative;
     min-height: 320px;
+    background: #1b1b1b;
+  }
+  .featured-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
     display: grid;
     place-items: center;
-    background: radial-gradient(120% 90% at 20% 20%, #ff7a45 0%, #7a1f5c 45%, #120a1f 100%);
+    border-radius: 50%;
+    background: rgba(13, 13, 15, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 20px;
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
-  .featured-media .eyebrow {
-    color: rgba(255, 255, 255, 0.75);
+  .featured:hover .play {
+    transform: scale(1.08);
   }
   .featured-body {
     padding: 32px;
@@ -145,7 +165,16 @@ const groups = [
     border-radius: var(--radius);
     background: var(--surface);
     border: 1px solid var(--line);
+    overflow: hidden;
     transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .thumb:empty {
+    background: radial-gradient(120% 90% at 20% 20%, #ff7a45 0%, #7a1f5c 45%, #120a1f 100%);
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .card:hover .thumb {
     transform: translateY(-4px);

@@ -1,10 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// TODO: free access key from https://web3forms.com (sent to the inbox you choose)
-const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY';
-// TODO: public contact email
-const EMAIL = 'hello@example.com';
+// Forwards to Nicholas's inbox through Cloudflare Email Routing.
+const EMAIL = 'hello@nicholasrode.com';
+const LINKEDIN = 'https://www.linkedin.com/in/nicholas-rode-453a2014/';
 ---
 
 <Base title="Contact · Nicholas Rode">
@@ -12,21 +11,15 @@ const EMAIL = 'hello@example.com';
     <p class="eyebrow">Contact</p>
     <h1>Let's work together.</h1>
     <p class="lede">
-      Interactive motion, prototypes, or product design for AI and data products. Tell me what
-      you're building.
+      Interactive motion, Rive and Lottie work, prototypes, or product UI. Tell me what you're
+      building and when you need it.
     </p>
 
-    <form action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-      <input type="hidden" name="subject" value="New message from portfolio" />
-      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
-      <label>Name<input name="name" required autocomplete="name" /></label>
-      <label>Email<input name="email" type="email" required autocomplete="email" /></label>
-      <label>Project<textarea name="message" rows="6" required></textarea></label>
-      <button type="submit">Send message</button>
-    </form>
+    <a class="button" href={`mailto:${EMAIL}`}>{EMAIL}</a>
 
-    <p class="alt">Or email <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+    <p class="alt">
+      Also on <a href={LINKEDIN} rel="noopener">LinkedIn</a>. Based in Vancouver, WA (Pacific time).
+    </p>
   </section>
 </Base>
 
@@ -46,43 +39,17 @@ const EMAIL = 'hello@example.com';
     color: var(--muted);
     margin: 0 0 40px;
   }
-  form {
-    display: grid;
-    gap: 20px;
-  }
-  label {
-    display: grid;
-    gap: 8px;
-    font-size: 14px;
-    color: var(--muted);
-  }
-  input,
-  textarea {
-    font: inherit;
-    color: var(--text);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 12px 14px;
-  }
-  input:focus,
-  textarea:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
-  }
-  .hp {
-    display: none;
-  }
-  button {
-    justify-self: start;
-    font: inherit;
+  .button {
+    display: inline-block;
     font-weight: 600;
     color: #fff;
     background: var(--accent);
-    border: 0;
     border-radius: 999px;
-    padding: 12px 24px;
-    cursor: pointer;
+    padding: 14px 28px;
+    text-decoration: none;
+  }
+  .button:hover {
+    filter: brightness(1.08);
   }
   .alt {
     margin-top: 32px;

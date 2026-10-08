@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
-  const work = await getCollection('work');
+  const work = await getCollection('work', (w) => !w.data.draft);
   return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
@@ -29,6 +29,27 @@ const { title, summary, role, year, tools } = entry.data;
     </div>
   </article>
 </Base>
+
+<script>
+  // Case-study loops play only while on screen. With reduced motion they stay paused and get controls.
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const videos = document.querySelectorAll<HTMLVideoElement>('.body video[data-loop]');
+  if (reduce) {
+    videos.forEach((v) => (v.controls = true));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    videos.forEach((v) => io.observe(v));
+  }
+</script>
 
 <style>
   .head {
@@ -62,8 +83,41 @@ const { title, summary, role, year, tools } = entry.data;
     margin: 4px 0 0;
   }
   .body {
-    max-width: 680px;
     padding-top: 24px;
+  }
+  .body > :global(*) {
+    max-width: 680px;
+  }
+  .body > :global(figure),
+  .body > :global(.pair) {
+    max-width: none;
+    margin: 32px 0;
+  }
+  .body :global(.pair figure) {
+    margin: 0;
+  }
+  .body :global(figure img),
+  .body :global(figure video) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .body :global(figcaption) {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+  .body :global(.pair) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 700px) {
+    .body :global(.pair) {
+      grid-template-columns: 1fr;
+    }
   }
   .body :global(h2) {
     font-size: 26px;

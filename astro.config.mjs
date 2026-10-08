@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://nicholasrode.com', // TODO: real domain
+  site: 'https://nicholasrode.com',
 });

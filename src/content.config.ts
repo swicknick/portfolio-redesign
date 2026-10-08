@@ -12,6 +12,8 @@ const work = defineCollection({
     tools: z.array(z.string()),
     category: z.enum(['featured', 'ui-motion', 'product', 'motion', 'concept']),
     order: z.number(),
+    cover: z.string().optional(),
+    draft: z.boolean().default(false),
   }),
 });
 
