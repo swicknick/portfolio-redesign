@@ -28,22 +28,6 @@ const groups = [
     </div>
   </ShaderHero>
 
-  <section class="wrap">
-    <div class="featured reveal" id="reel">
-      <div class="featured-media">
-        <button class="reel-play" type="button" aria-label="Play the 2025 motion reel">
-          <img src="/reel/poster.jpg" alt="" width="1920" height="1080" />
-          <span class="play" aria-hidden="true">▶</span>
-        </button>
-      </div>
-      <div class="featured-body">
-        <p class="eyebrow">Showreel · 2025</p>
-        <h2>Motion reel</h2>
-        <p>Product UI motion, interactive Rive work, and brand animation for B2B SaaS and AI products.</p>
-        <a href="/reel" class="more">Open full screen →</a>
-      </div>
-    </div>
-  </section>
 
   <section class="wrap" id="work">
     {
@@ -89,27 +73,6 @@ const groups = [
 </Base>
 
 <script>
-  // Play the reel in place on the first click, with sound (the click allows unmuted playback).
-  const btn = document.querySelector<HTMLButtonElement>('.reel-play');
-  // Card thumbnail loops play only while on screen, and not at all with reduced motion.
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        const v = e.target as HTMLVideoElement;
-        e.isIntersecting ? v.play().catch(() => {}) : v.pause();
-      }
-    });
-    document.querySelectorAll<HTMLVideoElement>('video[data-thumb]').forEach((v) => io.observe(v));
-  }
-
-  btn?.addEventListener('click', () => {
-    const v = document.createElement('video');
-    Object.assign(v, { src: '/reel/reel-1080.mp4', poster: '/reel/poster.jpg', controls: true, playsInline: true });
-    v.setAttribute('aria-label', 'Nicholas Rode 2025 motion reel');
-    btn.replaceWith(v);
-    v.play().catch(() => {});
-    v.focus();
-  });
 </script>
 
 <style>
@@ -129,86 +92,6 @@ const groups = [
     max-width: 38em;
     font-size: 19px;
     margin: 0;
-  }
-  .featured {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-    text-decoration: none;
-    background: var(--surface);
-    animation-delay: 0.1s;
-  }
-  .featured-media {
-    position: relative;
-    min-height: 320px;
-    background: #1b1b1b;
-  }
-  .reel-play {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: 0;
-    background: none;
-    cursor: pointer;
-  }
-  .featured-media video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: #000;
-  }
-  .featured-media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .play {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 64px;
-    height: 64px;
-    margin: -32px 0 0 -32px;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: rgba(13, 13, 15, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    font-size: 20px;
-    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .reel-play:hover .play,
-  .reel-play:focus-visible .play {
-    transform: scale(1.08);
-  }
-  .featured-body {
-    padding: 32px;
-    align-self: center;
-  }
-  .featured h2 {
-    font-size: 32px;
-    margin: 8px 0 12px;
-    letter-spacing: -0.01em;
-  }
-  .featured p {
-    color: var(--muted);
-    margin: 0 0 20px;
-  }
-  .more {
-    color: var(--accent);
-    font-weight: 500;
-    text-decoration: none;
-  }
-  .more:hover {
-    text-decoration: underline;
   }
   .group {
     margin-top: 80px;
@@ -258,14 +141,5 @@ const groups = [
     color: var(--muted);
   }
   @media (max-width: 760px) {
-    .featured {
-      grid-template-columns: 1fr;
-    }
-    .featured-media {
-      min-height: 220px;
-    }
-    .featured-body {
-      padding: 24px;
-    }
   }
 </style>
