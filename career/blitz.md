@@ -93,6 +93,6 @@ Check their careers pages:
 - ManvsMachine
 
 ## Each application
-- **Resume:** `2-product-tech.pdf`. If a role leans heavily one way (for example Rive or B2B SaaS), tweak `SUMMARY` in `build.py`, rebuild, and save a copy named for the company.
+- **Resume:** `career/resume/Nicholas-Rode-Resume.pdf`. If a role leans heavily one way (for example Rive or B2B SaaS), tweak `SUMMARY` in `build.py`, rebuild, and save a copy named for the company.
 - **Short note**, 3–4 sentences: why this company, the one most relevant proof point, and the reel link.
 - **Portfolio link:** https://nicholasrode.framer.website/ until the new site is live.
