@@ -47,7 +47,7 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 **Waiting on Nicholas**
 | Company | Role | Pay | Link | Status |
 |---|---|---|---|---|
-| Ally | Sr. UX Motion & Interaction Designer (LinkedIn says Remote; Workday lists Charlotte, NC) | $85–150K | https://ally.wd1.myworkdayjobs.com/Ally/job/Charlotte-NC/Sr-UX-Motion---Interaction-Designer_R2600620 | Passes filters; Workday needs an account Nicholas must create |
+| Ally | Sr. UX Motion & Interaction Designer (Charlotte, NC) | $85–150K | https://ally.wd1.myworkdayjobs.com/Ally/job/Charlotte-NC/Sr-UX-Motion---Interaction-Designer_R2600620 | **Closed 2026-10-08** mid-application (Workday: "job is no longer posted"). Steps 1–3 were filled in (salary $110K, no relocation, travel up to 25%). If it's reposted, reopen in Workday with "Use My Last Application". |
 
 **Skipped this run**
 - Pura Lead Motion Designer: Nicholas said yes, but LinkedIn lists it on-site in Pleasant Grove, UT. Held; ask him again.
