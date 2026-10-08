@@ -14,7 +14,7 @@ const { Content } = await render(entry);
 const { title, summary, role, year, tools, rive, howItWorks } = entry.data;
 ---
 
-<Base title={`${title} · Nicholas Rode`} description={summary}>
+<Base title={`${title} · Nicholas Rode`} description={summary} image={entry.data.cover ? `/og/${entry.id}.jpg` : undefined}>
   <article class="wrap">
     <header class="head reveal">
       <a href="/#work" class="back">← All work</a>
