@@ -183,7 +183,7 @@
     min-height: 100svh;
     margin-top: -88px; /* sit under the nav */
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* rule of thirds: content starts on the top-third line */
     overflow: hidden;
     isolation: isolate;
   }
@@ -207,7 +207,7 @@
   }
   .shader-content {
     width: 100%;
-    padding-top: 120px;
+    padding-top: max(120px, 33.333svh);
     padding-bottom: 80px;
   }
 </style>
