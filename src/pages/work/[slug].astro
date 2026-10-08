@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import RiveEmbed from '../../components/RiveEmbed.astro';
+import LottieScroll from '../../components/LottieScroll.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work', (w) => !w.data.draft);
@@ -9,7 +11,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, summary, role, year, tools } = entry.data;
+const { title, summary, role, year, tools, rive, scroll } = entry.data;
 ---
 
 <Base title={`${title} · Nicholas Rode`} description={summary}>
@@ -24,6 +26,24 @@ const { title, summary, role, year, tools } = entry.data;
         <div><dt class="eyebrow">Tools</dt><dd>{tools.join(', ')}</dd></div>
       </dl>
     </header>
+    {
+      rive.length > 0 && (
+        <section class="live-demos">
+          <p class="eyebrow">Live · try it</p>
+          <div class="demo-grid">
+            {rive.map((r) => <RiveEmbed {...r} />)}
+          </div>
+        </section>
+      )
+    }
+    {
+      scroll.length > 0 && (
+        <section class="live-demos">
+          <p class="eyebrow">Live · scroll through it</p>
+          <LottieScroll steps={scroll} />
+        </section>
+      )
+    }
     <div class="body">
       <Content />
     </div>
@@ -81,6 +101,15 @@ const { title, summary, role, year, tools } = entry.data;
   }
   dd {
     margin: 4px 0 0;
+  }
+  .live-demos {
+    padding-top: 40px;
+  }
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 20px;
+    margin-top: 16px;
   }
   .body {
     padding-top: 24px;

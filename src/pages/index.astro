@@ -2,10 +2,16 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ShaderHero from '../components/ShaderHero.astro';
+import RiveEmbed from '../components/RiveEmbed.astro';
 
 const work = (await getCollection('work', (w) => !w.data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
 );
+
+// Deepgram leads the page as live, playable Rive files; it's left out of the grid below.
+const live = work.find((w) => w.id === 'deepgram');
+const liveDemos = live ? live.data.rive.slice(0, 3) : [];
+const grid = work.filter((w) => w.id !== 'deepgram');
 
 const groups = [
   { key: 'ui-motion', label: 'Product UI motion' },
@@ -27,6 +33,27 @@ const groups = [
     </div>
   </ShaderHero>
 
+  {
+    live && (
+      <section class="wrap live" id="live">
+        <div class="live-head">
+          <div>
+            <p class="eyebrow">Live · {live.data.title} · {live.data.year}</p>
+            <h2>Go ahead, click around.</h2>
+            <p class="live-lede">
+              These are the production Rive files I built for Deepgram, running right here. Hover the
+              voices, tap one to hear it, press play on the transcript.
+            </p>
+          </div>
+          <a href={`/work/${live.id}`} class="more">See all four and how they work →</a>
+        </div>
+        <div class="live-grid">
+          {liveDemos.map((r) => <RiveEmbed {...r} />)}
+        </div>
+      </section>
+    )
+  }
+
   <section class="wrap">
     <a href="/reel" class="featured reveal">
       <div class="featured-media">
@@ -45,7 +72,7 @@ const groups = [
   <section class="wrap" id="work">
     {
       groups.map((g) => {
-        const items = work.filter((w) => w.data.category === g.key);
+        const items = grid.filter((w) => w.data.category === g.key);
         return (
           items.length > 0 && (
             <div class="group">
@@ -89,6 +116,37 @@ const groups = [
     max-width: 38em;
     font-size: 19px;
     margin: 0;
+  }
+  .live {
+    margin-top: 24px;
+    margin-bottom: 96px;
+  }
+  .live-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .live h2 {
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.02em;
+    margin: 8px 0 8px;
+  }
+  .live-lede {
+    color: var(--muted);
+    max-width: 36em;
+    margin: 0;
+  }
+  .live .more {
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .live-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 20px;
   }
   .featured {
     display: grid;

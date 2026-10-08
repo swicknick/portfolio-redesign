@@ -1,0 +1,143 @@
+---
+// Interactive Rive file. The runtime and the .riv load only when the embed nears the viewport,
+// it pauses off-screen, and with reduced motion it waits for a click before playing.
+interface Props {
+  src: string;
+  label: string;
+  stateMachine?: string; // defaults to the file's first state machine
+  artboard?: string;
+  ratio?: string; // CSS aspect-ratio, e.g. "16 / 9"
+  poster?: string;
+  caption?: string;
+  wide?: boolean;
+}
+
+const { src, label, stateMachine, artboard, ratio = '16 / 9', poster, caption, wide } = Astro.props;
+---
+
+<figure class:list={["rive", { wide }]}>
+  <div class="stage" style={`aspect-ratio: ${ratio}`}>
+    {poster && <img class="poster" src={poster} alt="" loading="lazy" decoding="async" />}
+    <canvas
+      data-rive={src}
+      data-sm={stateMachine}
+      data-artboard={artboard}
+      role="img"
+      aria-label={label}
+    ></canvas>
+    <button class="start" type="button" hidden>Play interactive demo</button>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .rive {
+    margin: 0;
+  }
+  .rive.wide {
+    grid-column: 1 / -1;
+  }
+  .stage {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .poster,
+  canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .poster {
+    object-fit: cover;
+    transition: opacity 0.4s;
+  }
+  .stage.live .poster {
+    opacity: 0;
+  }
+  .start {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font: inherit;
+    font-weight: 600;
+    color: var(--text);
+    background: rgba(13, 13, 15, 0.8);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  figcaption {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+</style>
+
+<script>
+  import wasmUrl from '@rive-app/webgl2/rive.wasm?url';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Rive Renderer (WebGL2) so feathering and the rest render exactly as authored in the editor.
+  let runtime: Promise<typeof import('@rive-app/webgl2')> | undefined;
+  const load = () => (runtime ??= import('@rive-app/webgl2'));
+
+  async function boot(canvas: HTMLCanvasElement) {
+    const { Rive, Layout, Fit, Alignment, RuntimeLoader } = await load();
+    RuntimeLoader.setWasmUrl(wasmUrl); // self-hosted, version-matched; no third-party CDN
+    const stage = canvas.parentElement!;
+    const sm = canvas.dataset.sm;
+    const r = new Rive({
+      src: canvas.dataset.rive!,
+      canvas,
+      artboard: canvas.dataset.artboard || undefined,
+      stateMachines: sm || undefined,
+      autoplay: true,
+      useOffscreenRenderer: true,
+      layout: new Layout({ fit: Fit.Contain, alignment: Alignment.Center }),
+      onLoad: () => {
+        if (!sm && r.stateMachineNames.length) r.play(r.stateMachineNames[0]);
+        r.resizeDrawingSurfaceToCanvas();
+        stage.classList.add('live');
+      },
+    });
+    new ResizeObserver(() => r.resizeDrawingSurfaceToCanvas()).observe(canvas);
+    new IntersectionObserver(([e]) => {
+      if (!stage.classList.contains('live')) return;
+      e.isIntersecting ? r.play() : r.pause();
+    }).observe(canvas);
+  }
+
+  const near = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        near.unobserve(e.target);
+        const canvas = e.target as HTMLCanvasElement;
+        if (reduce) {
+          const btn = canvas.parentElement!.querySelector<HTMLButtonElement>('.start')!;
+          btn.hidden = false;
+          btn.addEventListener('click', () => {
+            btn.hidden = true;
+            boot(canvas);
+          }, { once: true });
+        } else {
+          boot(canvas);
+        }
+      }
+    },
+    { rootMargin: '200px' },
+  );
+  // Start watching only after the page has loaded, so the renderer never competes with first paint.
+  const watch = () =>
+    document.querySelectorAll<HTMLCanvasElement>('canvas[data-rive]').forEach((c) => near.observe(c));
+  const idle = (fn: () => void) =>
+    'requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200);
+  if (document.readyState === 'complete') idle(watch);
+  else addEventListener('load', () => idle(watch), { once: true });
+</script>
