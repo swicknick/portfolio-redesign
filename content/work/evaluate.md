@@ -74,5 +74,6 @@ Trading was multi-step and complex, so I made a short video that stripped the UI
   <img src="/work/evaluate/onboarding-before-after.webp" alt="Full app UI simplified into onboarding-video frames" width="1600" height="972" loading="lazy" decoding="async" />
   <figcaption>From the full UI to only what a new trader needs to see.</figcaption>
 </figure>
+
 ## Outcome
 The app launched, with the website, trading product, and onboarding video shipped together.
