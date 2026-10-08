@@ -76,12 +76,17 @@ const groups = [
 </script>
 
 <style>
+  .hero {
+    /* Shrink-wrap to the headline so the supporting line can be sized against it. */
+    width: fit-content;
+    max-width: 100%;
+  }
   .hero .eyebrow {
     color: rgba(237, 237, 240, 0.7);
     margin-top: 0;
   }
   h1 {
-    font-size: clamp(34px, 5.5vw, 60px);
+    font-size: clamp(37px, 6.05vw, 66px);
     line-height: 1.05;
     letter-spacing: -0.02em;
     font-weight: 600;
@@ -90,7 +95,8 @@ const groups = [
   }
   .lede {
     color: var(--muted);
-    max-width: 38em;
+    /* Stays well inside the headline's width: no line ending lands near its edge. */
+    max-width: 82%;
     text-wrap: pretty;
     font-size: 19px;
     margin: 0;
