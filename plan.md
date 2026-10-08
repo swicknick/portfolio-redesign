@@ -15,7 +15,7 @@ Product / interactive motion and prototyping at a tech or AI company.
 ## Pay
 | Type | Walk away below | Say yes right away at |
 |---|---|---|
-| Full-time + benefits | $85k | $100k+ |
+| Full-time + benefits | $80k | $100k+ |
 | Contract (1099) | $55/hr | $70/hr+ |
 | Agency contract (W2) | $50/hr | $60/hr+ |
 

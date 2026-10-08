@@ -12,7 +12,7 @@ Nicholas wants a **full blitz**: every channel, as fast as possible. Read `plan.
    - Once he approves the batch, submit all of those applications without stopping again for each one.
    - Never send a LinkedIn message, a connection note, or an agency profile without approval of the text.
 3. **Pay filter:**
-   - Full-time: at least $85k, target $100k+.
+   - Full-time: at least $80k, target $100k+. (Floor lowered from $85k on 2026-10-08 to widen the pool.)
    - 1099 contract: at least $55/hr, target $70+.
    - Agency W2 contract: at least $50/hr.
    - Never enter his current rate. If a form insists on it, put the target instead.
