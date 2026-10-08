@@ -44,9 +44,12 @@ const work = defineCollection({
         }),
       )
       .default([]),
-    scroll: z
-      .array(z.object({ src: z.string(), title: z.string(), text: z.string() }))
-      .default([]),
+    howItWorks: z
+      .object({
+        title: z.string(),
+        steps: z.array(z.object({ title: z.string(), text: z.string() })),
+      })
+      .optional(),
   }),
 });
 

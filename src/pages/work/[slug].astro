@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import RiveEmbed from '../../components/RiveEmbed.astro';
-import LottieScroll from '../../components/LottieScroll.astro';
+import MaterializeHowItWorks from '../../components/MaterializeHowItWorks.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work', (w) => !w.data.draft);
@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, summary, role, year, tools, rive, scroll } = entry.data;
+const { title, summary, role, year, tools, rive, howItWorks } = entry.data;
 ---
 
 <Base title={`${title} · Nicholas Rode`} description={summary}>
@@ -36,17 +36,10 @@ const { title, summary, role, year, tools, rive, scroll } = entry.data;
         </section>
       )
     }
-    {
-      scroll.length > 0 && (
-        <section class="live-demos">
-          <p class="eyebrow">Live · scroll through it</p>
-          <LottieScroll steps={scroll} />
-        </section>
-      )
-    }
     <div class="body">
       <Content />
     </div>
+    {howItWorks && <MaterializeHowItWorks {...howItWorks} />}
   </article>
 </Base>
 

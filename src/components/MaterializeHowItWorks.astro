@@ -1,0 +1,181 @@
+---
+// Rebuild of the "How Materialize Works" scroll section from materialize.com/materialize-product,
+// matching the production component: six diagram states that crossfade (300 ms) as the matching
+// step crosses the middle 20% of the viewport, a sticky graphic, and step copy beside it.
+// Step 4's clock and color-cycling boxes are CSS animations inside step-4.svg, as in production.
+interface Step {
+  title: string;
+  text: string;
+}
+interface Props {
+  title: string;
+  steps: Step[];
+}
+
+const { title, steps } = Astro.props;
+---
+
+<section class="hiw">
+  <h2 class="hiw-title">{title}</h2>
+  <div class="hiw-grid">
+    <div class="hiw-graph">
+      <div class="hiw-frame">
+        {
+          steps.map((_, i) => (
+            <img
+              class:list={['hiw-state', { on: i === 0 }]}
+              src={`/work/materialize/how-it-works/step-${i + 1}.svg`}
+              alt={i === 0 ? 'Materialize architecture diagram' : ''}
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+          ))
+        }
+      </div>
+    </div>
+    <div class="hiw-content">
+      {
+        steps.map((s, i) => (
+          <div class="hiw-item" data-step={i + 1}>
+            <div>
+              <h3>{`${i + 1}. ${s.title}`}</h3>
+              <p>{s.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hiw {
+    --mz-bg: oklch(0.1726 0.0425 289.97);
+    --mz-body: oklch(0.9552 0.0245 298.61);
+    background: var(--mz-bg);
+    border-radius: 16px;
+    padding: 64px 16px;
+    margin: 48px 0;
+    font-family: Inter, var(--font);
+  }
+  .hiw-title {
+    text-align: center;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin: 0 0 48px;
+  }
+  .hiw-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    align-items: flex-start;
+    gap: 2rem;
+    width: 100%;
+  }
+  .hiw-graph {
+    position: sticky;
+    top: 70px;
+    z-index: 5;
+    order: 1;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 0.5rem;
+    background: var(--mz-bg);
+  }
+  .hiw-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1920 / 1080;
+    overflow: hidden;
+  }
+  .hiw-state {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 300ms linear;
+  }
+  .hiw-state.on {
+    opacity: 1;
+  }
+  .hiw-content {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+  .hiw-item {
+    display: flex;
+    align-items: center;
+    min-height: 40vh;
+    padding-top: 3rem;
+  }
+  .hiw-item h3 {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+  .hiw-item p {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--mz-body);
+    margin: 0;
+  }
+  @media (min-width: 48rem) {
+    .hiw {
+      padding: 64px 32px;
+    }
+    .hiw-graph {
+      padding: 0.75rem;
+      border-radius: 16px;
+    }
+  }
+  @media (min-width: 64rem) {
+    .hiw-grid {
+      grid-template-columns: 1fr minmax(auto, 375px);
+      gap: 4rem;
+    }
+    .hiw-graph {
+      top: 8rem;
+      padding: 0;
+    }
+    .hiw-content {
+      width: auto;
+    }
+    .hiw-item {
+      align-items: flex-start;
+      min-height: 60vh;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hiw-state {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Same trigger as production: a step becomes active when it enters the middle 20% of the viewport.
+  for (const root of document.querySelectorAll<HTMLElement>('.hiw')) {
+    const states = [...root.querySelectorAll<HTMLImageElement>('.hiw-state')];
+    const items = [...root.querySelectorAll<HTMLElement>('.hiw-item')];
+    const show = (n: number) => states.forEach((s, i) => s.classList.toggle('on', i === n - 1));
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) show(Number((e.target as HTMLElement).dataset.step));
+        }
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0 },
+    );
+    items.forEach((el) => io.observe(el));
+  }
+</script>
