@@ -41,7 +41,7 @@ JOBS = [
             "Shipped interactive motion, animation, and illustration for Gong and Fireworks AI, including product UI motion for Fireworks AI",
             "Built 4 interactive Rive product demos for Deepgram's AI voice platform: voice-to-text, voice avatars, assistant states, and a Slack integration walkthrough",
             "Designed a 10-piece Rive motion system for Shep's rebrand and raised the hero's Lighthouse score from 40 to 99 by switching its Rive runtime from WebGL2 to Canvas",
-            "Built AI-powered internal tools with Claude Code: a pipeline that turns After Effects renders into lightweight WebGL shaders and a Figma plugin that generates reliable React code",
+            "Built AI-powered tools with Claude Code, including Sequence to Shader (below) and a Figma plugin that generates reliable React code",
             "Use AI daily to prototype interactions and write production animation code, speeding up design-to-dev handoff",
             "Choose and optimize animation runtimes for mobile web performance",
         ],
@@ -68,7 +68,11 @@ JOBS = [
     },
 ]
 
+# A third item is an optional link, shown after the description.
 TOOLS = [
+    ("Sequence to Shader (open-source Claude skill)",
+     "Turns animated gradients into live WebGL backgrounds: 17.1 MB of video became 200 KB, matched frame by frame.",
+     "https://github.com/swicknick/sequence-to-shader"),
     ("Stroke Center (Figma Community)", "Plugin that converts inside/outside strokes to center for clean Lottie export."),
     ("Design to Webpage", "AI skill that turns Figma designs into working HTML prototypes with interactions and motion; used on client projects."),
 ]
@@ -107,7 +111,11 @@ def skills_html():
 
 
 def tools_html():
-    return "".join(f'<p class="tool"><strong>{e(k)}:</strong> {e(v)}</p>' for k, v in TOOLS)
+    out = []
+    for k, v, *link in TOOLS:
+        url = f' <a href="{e(link[0])}">{e(link[0].replace("https://", ""))}</a>' if link else ""
+        out.append(f'<p class="tool"><strong>{e(k)}:</strong> {e(v)}{url}</p>')
+    return "".join(out)
 
 
 def edu_html():
