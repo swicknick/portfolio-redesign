@@ -2,6 +2,8 @@
 // Full-bleed live hero: the Wave Star shader from the Sequence to Shader case study.
 // The module brings its own budget: pauses off-screen, holds a still for prefers-reduced-motion,
 // falls back to the poster without WebGL2, and fades as the page scrolls past.
+// Mouse: the fold leans toward the cursor, its edge light flares with movement, the palette blends
+// into red toward the right edge, and a faint ripple follows. Touch screens get the ripple only.
 const dir = '/work/sequence-to-shader/wave-star/';
 ---
 
@@ -16,8 +18,70 @@ const dir = '/work/sequence-to-shader/wave-star/';
   import { WaveStarBackground } from '/work/sequence-to-shader/wave-star/wave-star-background.js';
 
   const hero = document.getElementById('shader-hero');
-  new WaveStarBackground(hero, { basePath: '/work/sequence-to-shader/wave-star/' })
-    .init()
+  const bg = new WaveStarBackground(hero, {
+    basePath: '/work/sequence-to-shader/wave-star/',
+    ripple: { strength: 7 * 0.15 },
+  });
+
+  const STEER = 0.8;   // how far the fold leans toward the cursor
+  const GLOW = 0.15;   // how much the edge light flares with movement
+  const DRIFT = 1;     // how far the palette blends into red at the right edge
+  // The red end of the color drift, dark to light, matching the palette's order.
+  const RED = ['#0a0206', '#6e0716', '#d4102c', '#ff4d5e', '#ffe2e5'];
+
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const ease = (rate, dt) => 1 - Math.exp(-rate * dt);
+  // Mix in linear light so the midpoints stay vivid instead of going muddy.
+  const toLin = (c) => ((c /= 255) <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  const toSrgb = (c) => Math.round(255 * (c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055));
+  const rgb = (h) => [1, 3, 5].map((i) => toLin(parseInt(h.slice(i, i + 2), 16)));
+  const mixHex = (a, b, t) => {
+    const pa = rgb(a), pb = rgb(b);
+    return '#' + pa.map((v, i) => Math.max(0, Math.min(255, toSrgb(v + (pb[i] - v) * t))).toString(16).padStart(2, '0')).join('');
+  };
+
+  bg.init()
+    .then((ok) => {
+      if (!ok) return;
+      const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!finePointer || reduce) return;
+
+      const base = bg.getConfig();
+      const s = { x: 0, y: 0, glow: 0, red: 0 };
+      bg.use({
+        name: 'hero-mouse',
+        update(b, dt) {
+          const p = b.input.pointer, k = ease(2.5, dt);
+          // Steer: wave directions and heights follow the cursor.
+          s.x = lerp(s.x, p.inside ? p.x - 0.5 : 0, k);
+          s.y = lerp(s.y, p.inside ? p.y - 0.5 : 0, k);
+          // Glow: flares with pointer speed, then settles.
+          s.glow = Math.max(Math.min(3, Math.hypot(p.vx, p.vy)) * GLOW, s.glow * Math.exp(-2 * dt));
+          // Color drift: neutral on the left, into red toward the right edge.
+          s.red = lerp(s.red, p.inside ? Math.max(0, p.x) ** 1.25 : 0, ease(2.2, dt));
+
+          const g = 1 + s.glow * 0.9, t = Math.min(1, s.red * DRIFT);
+          b.set({
+            waves: base.waves.map((w, i) => ({
+              ...w,
+              direction: w.direction + s.x * 40 * STEER * (i ? -1 : 1),
+              height: w.height * (1 + s.y * 0.8 * STEER),
+            })),
+            glow: {
+              ...base.glow,
+              edgeLine: base.glow.edgeLine * g,
+              edgeGlow: base.glow.edgeGlow * g,
+              star: base.glow.star * (1 + s.glow * 0.5),
+            },
+            palette: {
+              ...base.palette,
+              stops: base.palette.stops.map((st, i) => ({ ...st, color: mixHex(st.color, RED[i] ?? RED[RED.length - 1], t) })),
+            },
+          });
+        },
+      });
+    })
     .catch((e) => console.warn(e));
 </script>
 
