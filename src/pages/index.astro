@@ -263,8 +263,13 @@ const groups = [
     max-width: 16em;
     margin: 16px 0 24px;
   }
+  /* The live gradient runs bright behind the copy; a soft shadow keeps the text readable without a scrim. */
+  .hero h1,
+  .hero .lede {
+    text-shadow: 0 1px 18px rgba(5, 5, 26, 0.55);
+  }
   .lede {
-    color: var(--muted);
+    color: rgba(237, 237, 240, 0.86);
     /* Stays well inside the headline's width: no line ending lands near its edge. */
     max-width: 82%;
     text-wrap: pretty;

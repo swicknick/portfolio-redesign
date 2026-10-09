@@ -1,180 +1,24 @@
 ---
-// Full-bleed procedural shader behind the hero copy.
-// Budget: no dependencies, renders at reduced resolution, pauses off-screen,
-// and draws one still frame for prefers-reduced-motion.
+// Full-bleed live hero: the Wave Star shader from the Sequence to Shader case study.
+// The module brings its own budget: pauses off-screen, holds a still for prefers-reduced-motion,
+// falls back to the poster without WebGL2, and fades as the page scrolls past.
+const dir = '/work/sequence-to-shader/wave-star/';
 ---
 
-<section class="shader-hero">
-  <canvas class="shader-canvas" aria-hidden="true"></canvas>
-  <div class="shader-fallback" aria-hidden="true"></div>
+<section class="shader-hero" id="shader-hero" style={`--poster: url('${dir}poster.webp')`}>
   <div class="wrap shader-content">
     <slot />
   </div>
 </section>
 
-<script>
-  const VERT = `#version 300 es
-  in vec2 p;
-  void main() { gl_Position = vec4(p, 0.0, 1.0); }`;
+<!-- Served as-is (not bundled): the module lives in /public and loads its still from basePath. -->
+<script type="module" is:inline>
+  import { WaveStarBackground } from '/work/sequence-to-shader/wave-star/wave-star-background.js';
 
-  const FRAG = `#version 300 es
-  precision highp float;
-  uniform vec2 uRes;
-  uniform float uTime;
-  uniform vec2 uMouse;   // 0..1, smoothed
-  uniform float uScroll; // 0..1 through the hero
-  out vec4 outColor;
-
-  float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-  float noise(vec2 p) {
-    vec2 i = floor(p), f = fract(p);
-    vec2 u = f * f * (3.0 - 2.0 * f);
-    return mix(mix(hash(i), hash(i + vec2(1, 0)), u.x),
-               mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), u.x), u.y);
-  }
-  float fbm(vec2 p) {
-    float v = 0.0, a = 0.5;
-    mat2 r = mat2(0.8, -0.6, 0.6, 0.8);
-    for (int i = 0; i < 5; i++) { v += a * noise(p); p = r * p * 2.0; a *= 0.5; }
-    return v;
-  }
-
-  void main() {
-    vec2 uv = gl_FragCoord.xy / uRes;
-    float aspect = uRes.x / uRes.y;
-    vec2 p = vec2(uv.x * aspect, uv.y) * 1.6;
-    vec2 m = vec2(uMouse.x * aspect, uMouse.y) * 1.6;
-    float t = uTime * 0.045;
-
-    // Cursor gently pulls the field toward it.
-    vec2 toM = m - p;
-    float pull = exp(-dot(toM, toM) * 1.8);
-    p += toM * pull * 0.35;
-
-    vec2 q = vec2(fbm(p + vec2(0.0, t)), fbm(p + vec2(5.2, 1.3) - t));
-    vec2 r = vec2(fbm(p + 3.5 * q + vec2(1.7, 9.2) + t * 0.6),
-                  fbm(p + 3.5 * q + vec2(8.3, 2.8) - t * 0.4));
-    float f = fbm(p + 3.0 * r);
-
-    vec3 base   = vec3(0.051, 0.051, 0.059);  // #0d0d0f
-    vec3 plum   = vec3(0.30, 0.08, 0.28);
-    vec3 indigo = vec3(0.16, 0.12, 0.42);
-    vec3 ember  = vec3(1.00, 0.48, 0.27);     // #ff7a45
-
-    vec3 col = mix(base, plum, smoothstep(0.25, 0.9, f));
-    col = mix(col, indigo, smoothstep(0.35, 1.0, length(q)) * 0.55);
-    col = mix(col, ember, smoothstep(0.62, 0.95, r.x * f * 1.6) * 0.85);
-    col += ember * pull * 0.12;
-
-    // Fade toward the page background as you scroll past the hero.
-    col = mix(col, base, uScroll * 0.85);
-
-    // Vignette keeps the copy readable on the left.
-    float v = smoothstep(1.25, 0.25, length((uv - vec2(0.62, 0.5)) * vec2(1.1, 1.4)));
-    col = mix(base, col, v * 0.95 + 0.05);
-
-    // Film grain, stronger in shadows than highlights.
-    float lum = dot(col, vec3(0.299, 0.587, 0.114));
-    float g = hash(gl_FragCoord.xy + fract(uTime) * 100.0) - 0.5;
-    col += g * mix(0.06, 0.015, lum);
-
-    outColor = vec4(col, 1.0);
-  }`;
-
-  function init(section: HTMLElement) {
-    const canvas = section.querySelector<HTMLCanvasElement>('.shader-canvas')!;
-    const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, powerPreference: 'low-power' });
-    if (!gl) return; // CSS fallback gradient stays visible
-
-    const compile = (type: number, src: string) => {
-      const s = gl.createShader(type)!;
-      gl.shaderSource(s, src);
-      gl.compileShader(s);
-      return s;
-    };
-    const prog = gl.createProgram()!;
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-    gl.useProgram(prog);
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(prog, 'p');
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-    const uRes = gl.getUniformLocation(prog, 'uRes');
-    const uTime = gl.getUniformLocation(prog, 'uTime');
-    const uMouse = gl.getUniformLocation(prog, 'uMouse');
-    const uScroll = gl.getUniformLocation(prog, 'uScroll');
-
-    // Smooth gradients don't need full resolution; drop further if frames run slow.
-    let scale = 0.5;
-    const resize = () => {
-      const w = Math.min(section.clientWidth * scale, 1280);
-      const h = (section.clientHeight / section.clientWidth) * w;
-      canvas.width = Math.max(1, Math.round(w));
-      canvas.height = Math.max(1, Math.round(h));
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-    };
-    resize();
-    new ResizeObserver(resize).observe(section);
-
-    const target = { x: 0.7, y: 0.55 };
-    const mouse = { ...target };
-    window.addEventListener('pointermove', (e) => {
-      const r = section.getBoundingClientRect();
-      target.x = (e.clientX - r.left) / r.width;
-      target.y = 1 - (e.clientY - r.top) / r.height;
-    }, { passive: true });
-
-    const draw = (time: number) => {
-      mouse.x += (target.x - mouse.x) * 0.06;
-      mouse.y += (target.y - mouse.y) * 0.06;
-      const r = section.getBoundingClientRect();
-      const scroll = Math.min(Math.max(-r.top / r.height, 0), 1);
-      gl.uniform1f(uTime, time / 1000);
-      gl.uniform2f(uMouse, mouse.x, mouse.y);
-      gl.uniform1f(uScroll, scroll);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-    };
-
-    section.classList.add('is-live');
-
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      draw(12000);
-      return;
-    }
-
-    let raf = 0;
-    let visible = true;
-    let last = 0;
-    let slow = 0;
-    const loop = (time: number) => {
-      const dt = time - last;
-      last = time;
-      if (dt > 24 && scale > 0.3 && ++slow > 30) {
-        scale = 0.3;
-        resize();
-      }
-      draw(time);
-      raf = requestAnimationFrame(loop);
-    };
-    const start = () => { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(loop); };
-    const stop = () => { cancelAnimationFrame(raf); raf = 0; };
-
-    new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      visible ? start() : stop();
-    }).observe(section);
-    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
-    start();
-  }
-
-  document.querySelectorAll<HTMLElement>('.shader-hero').forEach(init);
+  const hero = document.getElementById('shader-hero');
+  new WaveStarBackground(hero, { basePath: '/work/sequence-to-shader/wave-star/' })
+    .init()
+    .catch((e) => console.warn(e));
 </script>
 
 <style>
@@ -186,26 +30,11 @@
     align-items: flex-start; /* rule of thirds: content starts on the top-third line */
     overflow: hidden;
     isolation: isolate;
-  }
-  .shader-canvas,
-  .shader-fallback {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  .shader-fallback {
-    background:
-      radial-gradient(60% 70% at 70% 45%, rgba(255, 122, 69, 0.35), transparent 60%),
-      radial-gradient(70% 80% at 80% 60%, rgba(77, 20, 72, 0.9), transparent 70%),
-      var(--bg);
-    transition: opacity 0.8s ease;
-  }
-  .shader-hero.is-live .shader-fallback {
-    opacity: 0;
+    background: #05051a var(--poster) center / cover;
   }
   .shader-content {
+    position: relative;
+    z-index: 1; /* above the shader canvas */
     width: 100%;
     padding-top: max(120px, 33.333svh);
     padding-bottom: 80px;
