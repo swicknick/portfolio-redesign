@@ -5,7 +5,7 @@ import RiveEmbed from '../../components/RiveEmbed.astro';
 import MaterializeHowItWorks from '../../components/MaterializeHowItWorks.astro';
 
 export async function getStaticPaths() {
-  const work = await getCollection('work', (w) => !w.data.draft);
+  const work = await getCollection('work', (w) => !w.data.draft && !w.data.customPage);
   return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 

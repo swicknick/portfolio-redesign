@@ -13,8 +13,11 @@ const work = defineCollection({
     category: z.enum(['featured', 'ui-motion', 'product', 'motion', 'concept']),
     order: z.number(),
     cover: z.string().optional(),
-    coverVideo: z.string().optional(), // muted loop shown on the home card; cover is its poster
+    coverVideo: z.string().optional(), // 4:3 muted loop for the home card, played on hover; cover is its first frame
+    // Live shader for the home card instead of a video: an ES module in /public, its export, and its basePath.
+    coverShader: z.object({ module: z.string(), name: z.string(), basePath: z.string() }).optional(),
     draft: z.boolean().default(false),
+    customPage: z.boolean().default(false), // has its own src/pages/work/<id>.astro; the entry only feeds the home card
     rive: z
       .array(
         z.object({
