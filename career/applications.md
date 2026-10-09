@@ -30,6 +30,8 @@ Status: **open** means verified open on the company's own board that day.
 | 2026-10-07 | Solomon Page (agency; media tech client) | Motion Designer (contract), remote, $50–60/hr — https://opportunities.solomonpage.com/job/470729/Motion-Designer | 2-product-tech.pdf | No | Submitted by Nicholas; check ~2026-10-21 |
 | 2026-10-09 | Unity | Senior Graphic & Motion Designer (Brand Studio), Remote USA, $87–166K by zone — https://unitytech.wd1.myworkdayjobs.com/Unity/job/Montreal-Canada/Senior-Graphic-and-Motion-Designer_JOBREQ-2616314 | Nicholas-Rode-Resume.pdf | No (no note field); websites: nicholasrode.com + skill repo | Submitted (guest apply, Workday); check ~2026-10-23 |
 | 2026-10-09 | MyPrize (My Technology, Inc.) | Motion & Interactive Brand Designer, remote — https://job-boards.greenhouse.io/mytechnologyinc/jobs/4410032009 | Nicholas-Rode-Resume.pdf | Yes (Rive-first note, in the cover letter field) | Submitted; check ~2026-10-23 |
+| 2026-10-09 | Wpromote | Digital & Motion Designer, remote US, $74–95K — https://jobs.lever.co/wpromote/3e4854c3-3031-42c8-80b8-36dc5645d44d | Nicholas-Rode-Resume.pdf | Short answer only; desired salary $95,000 (top of range, above the $80K floor) | Submitted via Lever (LinkedIn Easy Apply forced an old resume); check ~2026-10-23 |
+| 2026-10-09 | Netflix | Senior Motion Designer, Live (Product Design), remote US, $310–420K — https://explore.jobs.netflix.net/careers/job/790318157691 | Nicholas-Rode-Resume.pdf | No (no note field); portfolio URL | Submitted (long shot: asks 10+ yrs live graphics); check ~2026-10-23 |
 | 2026-10-07 | Instrument (Portland) | General Application, Motion Designer (contract), remote US, $60–105/hr — https://jobs.lever.co/instrument/f81bfe66-3833-4028-af91-c4b1becebd2d | 2-product-tech.pdf (with Lighthouse 40→99) | No (form questions only; rate given as $70–85/hr target) | Submitted, approved by Nicholas; check ~2026-10-21 |
 
 ## Handoff for the browser session (2026-10-07)
@@ -84,7 +86,7 @@ Searched: LinkedIn (remote US + Portland metro), company boards (`job-scan.py`),
 ## Run 2026-10-08 (floor lowered to $80K)
 Searched: company boards (`job-scan.py`, 46 hits) and LinkedIn, sweeping every blitz title for remote US plus Portland metro, past month (63 relevant listings, most already ruled out on 10-07).
 
-**Proposed batch (waiting on Nicholas)**
+**Proposed batch: approved and all four submitted 2026-10-09 (see Sent)**
 | Company | Role | Pay | Link | Notes |
 |---|---|---|---|---|
 | Unity | Senior Graphic & Motion Designer (Brand Studio) | $87–166K by zone | https://www.linkedin.com/jobs/view/4467868854/ | Remote US, ~2 wks old. Brand + motion for a tech platform. |
