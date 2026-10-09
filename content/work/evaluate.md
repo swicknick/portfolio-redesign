@@ -5,8 +5,9 @@ role: UX/UI & Motion Designer
 year: 2023
 tools: [Figma, After Effects]
 category: product
+coverVideo: /work/evaluate/evaluate-card.mp4
 order: 3
-cover: /work/evaluate/live-trading.webp
+cover: /work/evaluate/evaluate-card.webp
 ---
 
 ## Your first trade, in 54 seconds

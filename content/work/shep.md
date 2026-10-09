@@ -5,8 +5,9 @@ role: Motion Designer & Illustrator
 year: 2025
 tools: [Rive]
 category: motion
+coverVideo: /work/shep/shep-card.mp4
 order: 6
-cover: /work/shep/illo-1.webp
+cover: /work/shep/shep-card.webp
 ---
 
 ## The problem

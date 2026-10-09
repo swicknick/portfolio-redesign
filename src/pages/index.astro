@@ -41,9 +41,13 @@ const groups = [
                 {items.map((w) => (
                   <a href={`/work/${w.id}`} class="card">
                     <div class="thumb">
-                      {w.data.coverVideo ? (
+                      {w.data.coverShader ? (
+                        <div class="live" data-card-shader={JSON.stringify(w.data.coverShader)} aria-hidden="true">
+                          {w.data.cover && <img src={w.data.cover} alt="" loading="lazy" decoding="async" />}
+                        </div>
+                      ) : w.data.coverVideo ? (
                         <video
-                          data-thumb
+                          data-card-video
                           src={w.data.coverVideo}
                           poster={w.data.cover}
                           muted
@@ -73,6 +77,172 @@ const groups = [
 </Base>
 
 <script>
+  // Card thumbnails rest on their first frame. Hover (or keyboard focus) plays the clip; leaving eases the
+  // playback speed down to a stop instead of freezing mid-frame. On touch screens the card nearest the middle
+  // of the screen plays. One card moves at a time, and nothing plays for reduced-motion visitors.
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const STOP_MS = 700; // ease-out to rest
+  const easeOut = (t: number) => 1 - (1 - t) ** 3;
+
+  interface Player {
+    start(): void;
+    stop(): void;
+    warm(): void;
+  }
+
+  function videoPlayer(v: HTMLVideoElement): Player {
+    let raf = 0;
+    return {
+      warm() {
+        if (v.preload !== 'auto') v.preload = 'auto';
+      },
+      start() {
+        cancelAnimationFrame(raf);
+        v.playbackRate = 1;
+        v.play().catch(() => {});
+      },
+      stop() {
+        if (v.paused) return;
+        cancelAnimationFrame(raf);
+        const t0 = performance.now();
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - t0) / STOP_MS);
+          // Browsers floor playbackRate around 0.0625, so pause once it's that slow.
+          const rate = 1 - easeOut(t);
+          if (t >= 1 || rate < 0.07) {
+            v.pause();
+            v.playbackRate = 1;
+            return;
+          }
+          v.playbackRate = rate;
+          raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      },
+    };
+  }
+
+  function shaderPlayer(host: HTMLElement): Player {
+    const cfg = JSON.parse(host.dataset.cardShader!) as { module: string; name: string; basePath: string };
+    const SPEED = 0.12; // a touch livelier than the case study hero, so a short hover shows the motion
+    let bg: any = null;
+    let loading: Promise<any> | null = null;
+    let want = false;
+    let raf = 0;
+    const load = () =>
+      (loading ??= import(/* @vite-ignore */ cfg.module).then(async (m) => {
+        const inst = new m[cfg.name](host, {
+          basePath: cfg.basePath,
+          motion: { autoplay: false, speed: SPEED },
+          scrollFade: { enabled: false },
+          performance: { maxDPR: 2, pauseOffscreen: true, supersample: 1 },
+        });
+        await inst.init();
+        // The module keeps redrawing its animated grain whenever it's on screen. On a card, rest should cost
+        // nothing, so the card takes over its visibility flag: it draws only while hovered or easing to a stop.
+        inst._io?.disconnect();
+        inst.renderNow();
+        inst.visible = false;
+        bg = inst;
+        if (want) startNow();
+        return inst;
+      }));
+    // The poster stays up until the shader is actually running, then the canvas owns the frame.
+    const startNow = () => {
+      cancelAnimationFrame(raf);
+      bg.visible = true;
+      bg.set({ motion: { speed: SPEED } });
+      bg.play();
+      host.classList.add('ready');
+    };
+    return {
+      warm() {
+        load().catch(() => {});
+      },
+      start() {
+        want = true;
+        if (bg) startNow();
+        else load().catch(() => {});
+      },
+      stop() {
+        want = false;
+        if (!bg || !bg.playing) return;
+        cancelAnimationFrame(raf);
+        const t0 = performance.now();
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - t0) / STOP_MS);
+          bg.set({ motion: { speed: SPEED * (1 - easeOut(t)) } });
+          if (t >= 1) {
+            bg.pause();
+            bg.visible = false; // hold the last frame; no redraws at rest
+            return;
+          }
+          raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      },
+    };
+  }
+
+  const cards = [...document.querySelectorAll<HTMLAnchorElement>('.card')]
+    .map((card) => {
+      const v = card.querySelector<HTMLVideoElement>('video[data-card-video]');
+      const s = card.querySelector<HTMLElement>('[data-card-shader]');
+      return { card, player: v ? videoPlayer(v) : s ? shaderPlayer(s) : null };
+    })
+    .filter((c): c is { card: HTMLAnchorElement; player: Player } => !!c.player);
+
+  let current: Player | null = null;
+  const activate = (p: Player) => {
+    if (current && current !== p) current.stop();
+    current = p;
+    p.start();
+  };
+  const deactivate = (p: Player) => {
+    p.stop();
+    if (current === p) current = null;
+  };
+
+  if (!reduce && cards.length) {
+    // Fetch each clip (or the shader) shortly before its card scrolls into view, after the page has loaded.
+    const near = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          near.unobserve(e.target);
+          cards.find((c) => c.card === e.target)?.player.warm();
+        }
+      },
+      { rootMargin: '300px 0px' },
+    );
+    const watch = () => cards.forEach(({ card }) => near.observe(card));
+    if (document.readyState === 'complete') watch();
+    else addEventListener('load', watch, { once: true });
+
+    if (canHover) {
+      for (const { card, player } of cards) {
+        card.addEventListener('pointerenter', () => activate(player));
+        card.addEventListener('pointerleave', () => deactivate(player));
+        card.addEventListener('focus', () => activate(player));
+        card.addEventListener('blur', () => deactivate(player));
+      }
+    } else {
+      // Touch: whichever card crosses the middle band of the screen plays.
+      const middle = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            const c = cards.find((x) => x.card === e.target);
+            if (!c) continue;
+            if (e.isIntersecting) activate(c.player);
+            else deactivate(c.player);
+          }
+        },
+        { rootMargin: '-45% 0px -45% 0px' },
+      );
+      cards.forEach(({ card }) => middle.observe(card));
+    }
+  }
 </script>
 
 <style>
@@ -131,8 +301,55 @@ const groups = [
     height: 100%;
     object-fit: cover;
   }
-  .card:hover .thumb {
+  /* The clip zooms slightly inside its frame while the frame lifts. */
+  .thumb > img,
+  .thumb > video,
+  .live {
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .live {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  /* The poster sits under the shader canvas until it's ready, then hides so the canvas owns the frame. */
+  .live > img {
+    position: absolute;
+    inset: 0;
+  }
+  .live.ready > img {
+    visibility: hidden;
+  }
+  .card:hover .thumb,
+  .card:focus-visible .thumb {
     transform: translateY(-4px);
+  }
+  .card:hover .thumb > img,
+  .card:hover .thumb > video,
+  .card:hover .live,
+  .card:focus-visible .thumb > img,
+  .card:focus-visible .thumb > video,
+  .card:focus-visible .live {
+    transform: scale(1.04);
+  }
+  .card:focus-visible {
+    outline: none;
+  }
+  .card:focus-visible .thumb {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover .thumb,
+    .card:focus-visible .thumb,
+    .card:hover .thumb > img,
+    .card:hover .thumb > video,
+    .card:hover .live,
+    .card:focus-visible .thumb > img,
+    .card:focus-visible .thumb > video,
+    .card:focus-visible .live {
+      transform: none;
+    }
   }
   .group-label {
     margin: 12px 0;

@@ -5,8 +5,9 @@ role: Motion Designer & Illustrator
 year: 2025
 tools: [After Effects, Lottie]
 category: motion
+coverVideo: /work/materialize/materialize-card.mp4
 order: 7
-cover: /work/materialize/ingestion-poster.webp
+cover: /work/materialize/materialize-card.webp
 howItWorks:
   label: Scroll-driven explainer · built for materialize.com
   notes:
